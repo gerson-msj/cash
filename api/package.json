@@ -1,0 +1,22 @@
+{
+  "name": "cash-api",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "repository": "https://github.com/gerson-msj/cash.git",
+  "author": "gerson-msj",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc",
+    "start": "yarn build && node dist/main.js",
+    "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
