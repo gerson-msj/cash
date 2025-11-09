@@ -4,7 +4,7 @@ import { User } from "../entities/User";
 
 const repository = AppDataSource.getRepository(User)
 
-export const getUsers = async (_req: Request, res: Response) => {
+export const getAccounts = async (_req: Request, res: Response) => {
     const users = await repository.find()
     return res.json(users)
 }

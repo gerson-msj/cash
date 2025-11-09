@@ -2,5 +2,14 @@
     "files.exclude": {
         "node_modules": true,
         "dist": true,
-    }
+        ".vscode": true
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.sortImports": "explicit",
+        "source.removeUnusedImports": "explicit",
+        "source.addMissingImports.ts": "explicit",
+        "source.fixAll.ts": "always",
+    },
 }
