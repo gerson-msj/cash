@@ -1,11 +1,15 @@
 import { DataSource, DataSourceOptions } from "typeorm";
-import { User } from "../entities/User";
+import Familia from "../entities/Familia";
+import Integrante from "../entities/Integrante";
 
 const options: DataSourceOptions = {
     type: 'sqlite',
     database: 'db.sqlite',
     synchronize: true,
-    entities: [User],
+    entities: [
+        Familia,
+        Integrante
+    ],
     subscribers: [],
     migrations: []
 }
