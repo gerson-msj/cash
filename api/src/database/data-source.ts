@@ -1,4 +1,5 @@
 import { DataSource, DataSourceOptions } from "typeorm";
+import Conta from "../entities/Conta";
 import Familia from "../entities/Familia";
 import Integrante from "../entities/Integrante";
 
@@ -8,7 +9,8 @@ const options: DataSourceOptions = {
     synchronize: true,
     entities: [
         Familia,
-        Integrante
+        Integrante,
+        Conta
     ],
     subscribers: [],
     migrations: []

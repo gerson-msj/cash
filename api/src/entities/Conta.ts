@@ -11,6 +11,9 @@ export default class Conta extends EntityBase {
     @ManyToOne(() => Integrante, (integrante) => integrante.contas, {
         onDelete: 'CASCADE'
     })
-    @JoinColumn({ name: 'idIntegrante' })
+    @JoinColumn({
+        name: 'idIntegrante',
+        foreignKeyConstraintName: 'fk_integrante_conta'
+    })
     integrante?: Integrante
 }

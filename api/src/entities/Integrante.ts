@@ -8,7 +8,10 @@ export default class Integrante extends EntityBase {
     @ManyToOne(() => Familia, {
         onDelete: 'CASCADE'
     })
-    @JoinColumn({ name: 'idFamilia' })
+    @JoinColumn({
+        name: 'idFamilia',
+        foreignKeyConstraintName: 'fk_familia_integrante'
+    })
     familia!: Familia
 
     @OneToMany(() => Conta, (conta) => conta.integrante, {
