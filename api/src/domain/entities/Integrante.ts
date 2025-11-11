@@ -1,15 +1,17 @@
 import { Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm"
+import Categoria from "./Categoria"
 import Conta from "./Conta"
-import EntityBase from "./EntityBase"
+import EntityBaseName from "./EntityBaseName"
 import Familia from "./Familia"
 
 @Entity('integrantes')
-export default class Integrante extends EntityBase {
+export default class Integrante extends EntityBaseName {
+
     @ManyToOne(() => Familia, {
         onDelete: 'CASCADE'
     })
     @JoinColumn({
-        name: 'idFamilia',
+        name: 'id_familia',
         foreignKeyConstraintName: 'fk_familia_integrante'
     })
     familia!: Familia
@@ -19,4 +21,10 @@ export default class Integrante extends EntityBase {
         eager: true
     })
     contas?: Conta[]
+
+    @OneToMany(() => Categoria, (categoria) => categoria.integrante, {
+        cascade: true,
+        eager: true
+    })
+    categorias?: Categoria[]
 }

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../database/data-source";
-import Familia from "../entities/Familia";
+import Familia from "../domain/entities/Familia";
 
 const repository = AppDataSource.getRepository(Familia)
 
