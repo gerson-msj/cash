@@ -12,6 +12,9 @@ export default class Conta extends EntityBaseName {
     @Column({ name: 'dia_vencimento_credito', nullable: true })
     diaVencimentoCredito?: number
 
+    @Column()
+    saldo: number = 0
+
     @ManyToOne(() => Integrante, (integrante) => integrante.contas, {
         onDelete: 'CASCADE'
     })
