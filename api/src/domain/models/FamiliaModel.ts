@@ -1,25 +1,25 @@
-import FamiliaEntity from "../entities/FamiliaEntity";
 import ModelBase from "./ModelBase";
 
 export default class FamiliaModel extends ModelBase {
     nome: string = ''
 
-    fromBody(body: string): boolean {
-        const data = JSON.parse(body) as FamiliaModel
+    // constructor(data?: FamiliaEntity | string) {
+    //     super();
+    //     if(data instanceof FamiliaEntity)
+    //         this.fromEntity(data)
+    //     if(typeof data === 'string' && data.trim() !== '')
+    //         this.fromBody(data)
+    // }
 
-        const isInvalid = !data.id || !data.nome
-        if (isInvalid)
-            return false
+    // fromBody(body: string) {
+    //     const data = JSON.parse(body) as FamiliaModel
+    //     this.id = data.id
+    //     this.nome = data.nome
+    //     this.remove = data.remove
+    // }
 
-        this.id = data.id
-        this.nome = data.nome
-        this.remove = data.remove
-
-        return true
-    }
-
-    fromEntity(entity: FamiliaEntity) {
-        this.id = entity.id
-        this.nome = entity.nome
-    }
+    // fromEntity(entity: FamiliaEntity) {
+    //     this.id = entity.id
+    //     this.nome = entity.nome
+    // }
 }

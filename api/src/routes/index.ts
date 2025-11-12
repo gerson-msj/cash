@@ -1,15 +1,12 @@
 import { Router } from "express";
-import { getAccounts } from "../controllers/accountController";
-import { obterFamilias } from "../controllers/familiaController";
+import FamiliaController from "../controllers/FamiliaController";
 
 const router = Router()
-const userRoute = '/usuarios'
+const familiaRoute = '/familia'
 const accountRoute = '/contas'
 
-// Users
-router.get(userRoute, obterFamilias)
+const familiaController = new FamiliaController()
 
-// Accounts
-router.get(accountRoute, getAccounts)
+router.get(familiaRoute, familiaController.get)
 
 export default router
