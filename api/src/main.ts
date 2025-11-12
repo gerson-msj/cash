@@ -1,19 +1,30 @@
-import express from "express"
+import express, { Application } from "express"
+import FamiliaController from "./controllers/FamiliaController"
 import { AppDataSource } from "./database/data-source"
-import router from "./routes"
 
-const initializeApp = (): Promise<void> => {
-    return new Promise((resolve, reject) => {
-        const app = express()
-        app.use(express.json())
-        app.use('/api', router)
-        app.listen(3000, (error) => {
-            if (error)
-                reject(error)
-            else
-                resolve()
+class AppBootstrap {
+    app: Application
+
+    constructor() {
+        this.app = express()
+        this.app.use(express.json())
+    }
+
+    initializeControllers() {
+        new FamiliaController(this.app)
+    }
+
+    async initializeApp(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.app.listen(3000, (error) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve()
+                }
+            })
         })
-    })
+    }
 }
 
 const bootstrap = async () => {
@@ -25,7 +36,9 @@ const bootstrap = async () => {
     }
 
     try {
-        await initializeApp()
+        const app = new AppBootstrap()
+        app.initializeControllers()
+        await app.initializeApp()
     } catch (error) {
         console.error('⚠️ Falha ao iniciar a aplicação', error)
         process.exit(1)

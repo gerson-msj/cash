@@ -1,0 +1,21 @@
+
+### GET Familia
+
+GET {{host}}/familia
+
+### POST Familia
+POST {{host}}/familia
+Content-Type: application/json
+
+[
+    {
+        "id": 0,
+        "nome": "Silva",
+        "remove": true
+    },
+    {
+        "id": 0,
+        "nome": "Moraes",
+        "remove": true
+    }
+]

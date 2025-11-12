@@ -1,8 +1,7 @@
 {
     "files.exclude": {
-        "node_modules": true,
         "dist": true,
-        ".vscode": true
+        "node_modules": true
     },
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
@@ -12,4 +11,9 @@
         "source.addMissingImports.ts": "explicit",
         "source.fixAll.ts": "always",
     },
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "host": "http://localhost:3000/api"
+        }
+    }
 }
