@@ -8,7 +8,7 @@
             "name": "Debug",
             "type": "node-terminal",
             "request": "launch",
-            "command": "yarn run start:dev",
+            "command": "yarn run dev",
             "cwd": "${workspaceFolder}"
         }
     ]

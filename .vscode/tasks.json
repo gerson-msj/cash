@@ -1,0 +1,74 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "web",
+            "type": "shell",
+            "command": "yarn",
+            "args": [
+                "dev"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/web"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": [
+                    {
+                        "regexp": "^(ERROR|WARNING) \\(([^)]+)\\) (.+):([0-9]+):([0-9]+) - (.+)$",
+                        "severity": 1,
+                        "file": 3,
+                        "line": 4,
+                        "column": 5,
+                        "message": 6
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "VITE",
+                    "endsPattern": "Local"
+                }
+            }
+        },
+          {
+            "label": "api",
+            "type": "shell",
+            "command": "yarn",
+            "args": [
+                "dev"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/api"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": [
+                    {
+                        "regexp": "^(ERROR|WARNING) \\(([^)]+)\\) (.+):([0-9]+):([0-9]+) - (.+)$",
+                        "severity": 1,
+                        "file": 3,
+                        "line": 4,
+                        "column": 5,
+                        "message": 6
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "yarn",
+                    "endsPattern": "Rodando"
+                }
+            }
+        }
+
+    ]
+}

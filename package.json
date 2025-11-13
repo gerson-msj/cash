@@ -1,0 +1,20 @@
+{
+  "name": "cash",
+  "version": "1.0.0",
+  "description": "Execução unificada dos projetos web e api",
+  "main": "index.js",
+  "repository": "https://github.com/gerson-msj/cash.git",
+  "author": "gerson-msj <gerson.msj@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "concurrently \"yarn --cwd api start\" \"yarn --cwd web start\"",
+    "dev": "concurrently \"yarn --cwd api dev\" \"yarn --cwd web dev\"",
+    "dev:api": "yarn --cwd api start",
+    "dev:web": "yarn --cwd web start",
+    "build": "yarn --cwd web build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

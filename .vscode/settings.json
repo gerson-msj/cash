@@ -1,0 +1,21 @@
+{
+    "files.exclude": {
+        "**/dist/": true,
+        "**/node_modules/": true,
+        "**/chrome-profile-data/": true,
+        "**/edge-profile-data/": true,
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.sortImports": "explicit",
+        "source.removeUnusedImports": "explicit",
+        "source.addMissingImports.ts": "explicit",
+        "source.fixAll.ts": "always",
+    },
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "host": "http://localhost:3000/api"
+        }
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "api",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "yarn run dev",
+            "cwd": "${workspaceFolder}/api"
+        },
+        {
+            "name": "web",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/web",
+            "userDataDir": "${workspaceFolder}/web/.vscode/chrome-profile-data",
+            "preLaunchTask": "web"
+        },
+        {
+            "name": "vite",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "yarn run dev",
+            "cwd": "${workspaceFolder}/web",
+            "serverReadyAction": {
+                "pattern": "Local:\\s+(http?://\\S+)",
+                "uriFormat": "%s",
+                "action": "debugWithChrome",
+            },
+        }
+    ],
+    "compounds": [
+        {
+            "name": "dev",
+            "configurations": [
+                "api",
+                "web",
+            ],
+            "stopAll": true
+        }
+    ]
+}
