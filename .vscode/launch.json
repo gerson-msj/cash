@@ -1,5 +1,15 @@
 {
     "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "dev",
+            "configurations": [
+                "api",
+                "web",
+            ],
+            "stopAll": true
+        }
+    ],
     "configurations": [
         {
             "name": "api",
@@ -28,16 +38,25 @@
                 "uriFormat": "%s",
                 "action": "debugWithChrome",
             },
-        }
-    ],
-    "compounds": [
+        },
         {
-            "name": "dev",
-            "configurations": [
-                "api",
-                "web",
-            ],
-            "stopAll": true
+            "name": "web ff",
+            "type": "firefox",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/web/src",
+            "preLaunchTask": "web ff",
+            "reAttach": true,
+            "reloadOnAttach": true,
+            "keepProfileChanges": true,
+            "firefoxExecutable": "/usr/bin/firefox",
+            "profileDir": "${workspaceFolder}/web/.vscode/firefox-profile",
+            "pathMappings": [
+                {
+                    "url": "http://localhost:5173/src",
+                    "path": "${workspaceFolder}/web/src"
+                }
+            ]
         }
     ]
 }

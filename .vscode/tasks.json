@@ -35,7 +35,7 @@
                 }
             }
         },
-          {
+        {
             "label": "api",
             "type": "shell",
             "command": "yarn",
@@ -68,7 +68,34 @@
                     "endsPattern": "Rodando"
                 }
             }
+        },
+        {
+            "label": "web ff",
+            "type": "shell",
+            "command": "yarn dev",
+            "options": {
+                "cwd": "${workspaceFolder}/web"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Local:",
+                    "endsPattern": "ready in"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
         }
-
     ]
 }
