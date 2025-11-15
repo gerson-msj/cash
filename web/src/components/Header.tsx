@@ -11,6 +11,7 @@ function Header() {
                     Configurações
                 </NavLink>
             </nav>
+            <hr />
         </>
     )
 }
