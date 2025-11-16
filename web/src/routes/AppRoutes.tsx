@@ -11,6 +11,8 @@ export default function AppRoutes() {
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/config" element={<Config />} />
+            <Route path="/config/familia" element={<Familia />} />
+            <Route path="/config/integrantes" element={<Integrantes />} />
         </Routes>
     );
 }

@@ -1,0 +1,11 @@
+.config .header {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.config nav {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
