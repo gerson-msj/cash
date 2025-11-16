@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import { CadastroDefault, type ICadastro } from "../types"
+import { CadastroDefault, type ICadastro } from "../interfaces"
 
 export interface CadastroState {
     cadastro: ICadastro
