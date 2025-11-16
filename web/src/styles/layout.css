@@ -1,11 +1,14 @@
 :root {
-  --header-height: 90px;
+  --bg-color: inherit;
+  --color: inherit;
+  --border-color: inherit;
+  --button-bg-color: inherit;
 }
 
 
 header {
   height: var(--header-height);
-  padding: 0;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -16,6 +19,19 @@ main {
   width: 100%;
   height: calc(100vh - var(--header-height));
   overflow-y: auto;
+  padding: 10px;
+  padding-left: 25px;
+}
+
+.line {
+  background-image: linear-gradient(to right,
+      var(--bg-color),
+      var(--border-color) 10%,
+      var(--bg-color) 90%);
+  background-color: var(--border-color);
+  width: 90%;
+  height: 1px;
+  align-self: center;
 }
 
 /* .logo {

@@ -1,12 +1,15 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import { CadastroDefault, type ICadastro } from "../interfaces"
+import { CadastroDefault, type ICadastro } from "../../types"
+import { cadastroActions } from "./actions"
 
-export interface CadastroState {
-    cadastro: ICadastro
+interface CadastroState {
+    cadastro: ICadastro,
+    cadastrado: boolean
 }
 
 const initialState: CadastroState = {
-    cadastro: CadastroDefault
+    cadastro: CadastroDefault,
+    cadastrado: false
 }
 
 const cadastroSlice = createSlice({
@@ -22,12 +25,13 @@ const cadastroSlice = createSlice({
             const { name, value } = action.payload
             state.cadastro[name] = value
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(cadastroActions.saveSuccess, (state, action) => {
+                state.cadastrado = action.payload != null
+            })
     }
 })
 
-export const {
-    changeCadastro
-} = cadastroSlice.actions
-
-const cadastroReducer = cadastroSlice.reducer
-export default cadastroReducer
+export default cadastroSlice

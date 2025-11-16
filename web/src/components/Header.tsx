@@ -11,7 +11,7 @@ function Header() {
                     Entrar
                 </Link>
             </nav>
-            <hr />
+            <div className="line" />
         </>
     )
 }

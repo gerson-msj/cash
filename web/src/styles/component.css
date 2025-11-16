@@ -1,11 +1,13 @@
 :root {
-  --header-heading-color: rgb(200, 230, 230);
-  --header-heading-color-hover: rgb(200, 255, 255);
+  --header-heading-color: rgb(200, 220, 230);
+  --header-heading-color-hover: rgb(200, 245, 255);
+  --a: rgb(80, 180, 255);
+  --a-hover: rgb(70, 225, 255);
 }
 
 h1,
 h2 {
-  margin: 5px 25px;
+  margin: 5px;
   color: var(--header-heading-color);
 }
 
@@ -14,17 +16,19 @@ h1:hover {
 }
 
 nav {
-  margin: 5px 30px;
+  margin: 5px 5px;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--a);
   text-decoration: inherit;
+  transition: color 0.25s;
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--a-hover);
+
 }
 
 hr {
@@ -37,13 +41,7 @@ hr {
   :root {
     --header-heading-color: rgb(25, 50, 50);
     --header-heading-color-hover: rgb(25, 70, 70);
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
+    --a: rgb(80, 180, 255);
+    --a-hover: rgb(70, 225, 255);
   }
 }

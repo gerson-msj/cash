@@ -1,17 +1,23 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "../sagas";
-import cadastroReducer from "./cadastroReducer";
-
+import { all } from "redux-saga/effects";
+import cadastroSaga from "./cadastro/sagas";
+import cadastroSlice from "./cadastro/slice";
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
     reducer: combineReducers({
-        cadastroReducer
+        cadastro: cadastroSlice.reducer
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
+
+function* rootSaga() {
+    yield all([
+        cadastroSaga()
+    ])
+}
 
 sagaMiddleware.run(rootSaga)
 
