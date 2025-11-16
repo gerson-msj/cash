@@ -1,15 +1,15 @@
-import { NavLink } from "react-router"
+import { Link } from "react-router"
 
 function Header() {
     return (
         <>
-            <NavLink to="/">
+            <Link to="/">
                 <h1>Cash</h1>
-            </NavLink>
+            </Link>
             <nav>
-                <NavLink to="/config">
-                    Configurações
-                </NavLink>
+                <Link to="/login">
+                    Entrar
+                </Link>
             </nav>
         </>
     )
