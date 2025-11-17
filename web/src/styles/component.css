@@ -37,6 +37,49 @@ hr {
   width: 90%;
 }
 
+.aviso {
+  display: flex;
+  width: 100%;
+  height: auto;
+  margin: 5px 0;
+  padding: 0;
+  justify-content: center;
+
+  .sucesso,
+  .erro,
+  .alerta {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    width: 90%;
+    min-height: 50px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: inset;
+
+  }
+
+  .sucesso {
+    color: rgb(150, 180, 150);
+    border-color: rgba(150, 180, 150, .6);
+    box-shadow: 3px 3px 6px rgba(150, 180, 150, .1);
+    background-color: rgba(150, 180, 150, .1);
+    opacity: 0;
+    animation: alertaFade 4s forwards;
+  }
+}
+
+@keyframes alertaFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     --header-heading-color: rgb(25, 50, 50);
