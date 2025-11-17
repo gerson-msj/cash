@@ -59,14 +59,34 @@ hr {
 
   }
 
-  .sucesso {
-    color: rgb(150, 180, 150);
-    border-color: rgba(150, 180, 150, .6);
-    box-shadow: 3px 3px 6px rgba(150, 180, 150, .1);
-    background-color: rgba(150, 180, 150, .1);
+  .erro {
+    color: rgb(220, 125, 125);
+    border-color: rgba(220, 125, 125, .6);
+    box-shadow: 3px 3px 6px rgba(220, 125, 125, .1);
+    background-color: rgba(220, 125, 125, .1);
     opacity: 0;
     animation: alertaFade 4s forwards;
   }
+
+  .sucesso {
+    color: rgb(125, 200, 125);
+    border-color: rgba(125, 200, 125, .6);
+    box-shadow: 3px 3px 6px rgba(125, 200, 125, .1);
+    background-color: rgba(125, 200, 125, .1);
+    opacity: 0;
+    animation: alertaFade 4s forwards;
+  }
+
+  .alerta {
+    color: rgb(200, 200, 125);
+    border-color: rgba(200, 200, 125, .6);
+    box-shadow: 3px 3px 6px rgba(200, 200, 125, .1);
+    background-color: rgba(200, 200, 125, .1);
+    opacity: 0;
+    animation: alertaFade 4s forwards;
+  }
+
+
 }
 
 @keyframes alertaFade {
