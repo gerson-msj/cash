@@ -1,6 +1,8 @@
 import { useEffect, type ChangeEvent } from "react"
+import Aviso from "../components/Aviso"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { cadastroActions } from "../store/cadastro/actions"
+import { avisoActions } from "../store/aviso"
+import { cadastroActions } from "../store/cadastro"
 import type { ICadastro } from "../types"
 
 function Cadastro() {
@@ -11,6 +13,7 @@ function Cadastro() {
     const change = (name: keyof ICadastro, event: ChangeEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value
         dispatch(cadastroActions.change({ name, value }))
+        dispatch(avisoActions.remover())
     }
 
     const cadastrar = () => {
@@ -47,6 +50,7 @@ function Cadastro() {
                     <button type="button" onClick={() => cadastrar()}>Cadastrar</button>
                 </div>
             </form>
+            <Aviso />
         </>
     )
 }
