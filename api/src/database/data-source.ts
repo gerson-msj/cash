@@ -2,7 +2,7 @@ import { DataSource, DataSourceOptions } from "typeorm";
 import Categoria from "../domain/entities/Categoria";
 import Conta from "../domain/entities/Conta";
 import FamiliaEntity from "../domain/entities/FamiliaEntity";
-import Integrante from "../domain/entities/Integrante";
+import IntegranteEntity from "../domain/entities/IntegranteEntity";
 import Movimento from "../domain/entities/Movimento";
 
 const options: DataSourceOptions = {
@@ -11,7 +11,7 @@ const options: DataSourceOptions = {
     synchronize: true,
     entities: [
         FamiliaEntity,
-        Integrante,
+        IntegranteEntity,
         Conta,
         Categoria,
         Movimento,

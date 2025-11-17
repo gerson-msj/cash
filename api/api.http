@@ -1,4 +1,16 @@
 
+### POST Cadastro
+POST {{host}}/cadastro
+Content-Type: application/json
+
+{
+    "nome": "Gerson",
+    "familia": "Moraes",
+    "email": "gerson.msj@gmail.com",
+    "senha": "gerson"
+}
+
+
 ### GET Familia
 
 GET {{host}}/familia

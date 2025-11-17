@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { ContaTipo } from "../enums";
 import EntityBaseName from "./EntityBaseName";
-import Integrante from "./Integrante";
+import IntegranteEntity from "./IntegranteEntity";
 
 @Entity('contas')
 export default class Conta extends EntityBaseName {
@@ -15,12 +15,13 @@ export default class Conta extends EntityBaseName {
     @Column()
     saldo: number = 0
 
-    @ManyToOne(() => Integrante, (integrante) => integrante.contas, {
+    @ManyToOne(() => IntegranteEntity, (integrante) => integrante.contas, {
+        nullable: false,
         onDelete: 'CASCADE'
     })
     @JoinColumn({
         name: 'id_integrante',
         foreignKeyConstraintName: 'fk_integrante_conta'
     })
-    integrante!: Integrante
+    integrante!: IntegranteEntity
 }

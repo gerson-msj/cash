@@ -1,4 +1,5 @@
 import express, { Application } from "express"
+import CadastroController from "./controllers/CadastroController"
 import FamiliaController from "./controllers/FamiliaController"
 import { AppDataSource } from "./database/data-source"
 
@@ -12,6 +13,7 @@ class AppBootstrap {
 
     initializeControllers() {
         new FamiliaController(this.app)
+        new CadastroController(this.app)
     }
 
     async initializeApp(): Promise<void> {

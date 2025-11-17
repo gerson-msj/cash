@@ -11,12 +11,3 @@ export const CadastroDefault: ICadastro = {
     email: '',
     senha: ''
 }
-
-export enum tipoAviso {
-    sucesso,
-    alerta,
-    erro
-}
-export interface IAviso {
-
-}

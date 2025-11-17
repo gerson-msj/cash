@@ -3,7 +3,7 @@ import { RepasseTipo } from "../enums";
 import Categoria from "./Categoria";
 import Conta from "./Conta";
 import EntityBase from "./EntityBase";
-import Integrante from "./Integrante";
+import IntegranteEntity from "./IntegranteEntity";
 
 @Entity('movimento')
 export default class Movimento extends EntityBase {
@@ -47,7 +47,7 @@ export default class Movimento extends EntityBase {
     @Column({ name: 'repasse_valor' })
     repasseValor?: number
 
-    @ManyToMany(() => Integrante, {
+    @ManyToMany(() => IntegranteEntity, {
         cascade: true,
         onDelete: 'CASCADE'
     })
@@ -62,5 +62,5 @@ export default class Movimento extends EntityBase {
             foreignKeyConstraintName: 'fk_integrante_repasse',
         }
     })
-    integrantesRepasse?: Integrante[]
+    integrantesRepasse?: IntegranteEntity[]
 }
