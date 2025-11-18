@@ -1,8 +1,8 @@
 import { useEffect, type ChangeEvent } from "react"
 import Aviso from "../components/Aviso"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { avisoActions } from "../store/aviso"
 import { cadastroActions } from "../store/cadastro"
+import { uiStateActions } from "../store/uiState"
 import type { ICadastro } from "../types"
 
 function Cadastro() {
@@ -13,7 +13,7 @@ function Cadastro() {
     const change = (name: keyof ICadastro, event: ChangeEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value
         dispatch(cadastroActions.change({ name, value }))
-        dispatch(avisoActions.remover())
+        dispatch(uiStateActions.remover())
     }
 
     const cadastrar = () => {

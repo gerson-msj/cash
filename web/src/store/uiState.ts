@@ -1,28 +1,30 @@
 import { createAction, createSlice } from "@reduxjs/toolkit"
 import type IAviso from "../domain/interfaces/IAviso"
 
-interface AvisoState {
+interface state {
     aviso?: IAviso
+    espera: boolean
 }
 
-const initialState: AvisoState = {
-    aviso: undefined
+const initialState: state = {
+    aviso: undefined,
+    espera: false
 }
 
-const avisoTypes = {
+const types = {
     incluir: 'aviso/incluir',
     remover: 'aviso/remover'
 }
 
 const actions = {
-    incluir: createAction<IAviso>(avisoTypes.incluir)
+    incluir: createAction<IAviso>(types.incluir)
 }
 
-export const avisoSlice = createSlice({
-    name: "Aviso",
+export const uiStateSlice = createSlice({
+    name: "UIState",
     initialState,
     reducers: {
-        removerAviso: (state: AvisoState) => {
+        removerAviso: (state: state) => {
             if (state.aviso)
                 state.aviso = undefined
         }
@@ -35,7 +37,7 @@ export const avisoSlice = createSlice({
     }
 })
 
-export const avisoActions = {
-    remover: avisoSlice.actions.removerAviso,
+export const uiStateActions = {
+    remover: uiStateSlice.actions.removerAviso,
     incluir: actions.incluir
 }

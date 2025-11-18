@@ -1,7 +1,7 @@
 import { createAction, createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { put, takeLatest } from "redux-saga/effects"
 import { CadastroDefault, type ICadastro } from "../types"
-import { avisoActions } from "./aviso"
+import { uiStateActions } from "./uiState"
 
 interface CadastroState {
     cadastro: ICadastro,
@@ -51,7 +51,7 @@ export const cadastroActions = {
 }
 
 function* request(action: ReturnType<typeof cadastroActions.save>) {
-    yield put(avisoActions.incluir({ tipo: "ERRO", mensagem: "Teste de mensagem de erro" }))
+    yield put(uiStateActions.incluir({ tipo: "ERRO", mensagem: "Teste de mensagem de erro" }))
     const result = action.payload
     yield put(privateActions.saveSuccess(result))
 }

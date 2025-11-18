@@ -1,14 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
-import { avisoSlice } from "./aviso";
 import { cadastroSaga, cadastroSlice } from "./cadastro";
+import { uiStateSlice } from "./uiState";
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
     reducer: combineReducers({
-        aviso: avisoSlice.reducer,
+        aviso: uiStateSlice.reducer,
         cadastro: cadastroSlice.reducer,
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
