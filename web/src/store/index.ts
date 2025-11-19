@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
+import { apiInjectStore } from "./api";
 import { cadastroSaga, cadastroSlice } from "./cadastro";
 import { uiStateSlice } from "./uiState";
 
@@ -13,6 +14,8 @@ export const store = configureStore({
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
+
+apiInjectStore(store)
 
 function* rootSaga() {
     yield all([
