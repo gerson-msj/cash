@@ -1,3 +1,5 @@
+import cookieParser from "cookie-parser"
+import dotenv from "dotenv"
 import express, { Application } from "express"
 import CadastroController from "./controllers/CadastroController"
 import FamiliaController from "./controllers/FamiliaController"
@@ -7,7 +9,9 @@ class AppBootstrap {
     app: Application
 
     constructor() {
+        dotenv.config()
         this.app = express()
+        this.app.use(cookieParser(process.env.COOKIE_SECRET))
         this.app.use(express.json())
     }
 

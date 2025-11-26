@@ -36,6 +36,7 @@ class CadastroController extends ControllerBase<CadastroService> {
                 httpOnly: true,
                 secure: false,
                 sameSite: "lax",
+                signed: true,
                 maxAge: 90 * 24 * 60 * 60 * 1000,
             })
 
