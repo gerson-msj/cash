@@ -13,7 +13,7 @@ function Cadastro() {
     const change = (name: keyof ICadastro, event: ChangeEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value
         dispatch(cadastroActions.change({ name, value }))
-        dispatch(uiStateActions.remover())
+        dispatch(uiStateActions.ocultarAviso())
     }
 
     const cadastrar = () => {

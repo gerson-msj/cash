@@ -1,7 +1,10 @@
 import { createAction, createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import { put, takeLatest } from "redux-saga/effects"
+import type { AxiosResponse } from "axios"
+import { call, put, takeLatest } from "redux-saga/effects"
+import type { IAuth } from "../domain/interfaces/IAuth"
 import { CadastroDefault, type ICadastro } from "../types"
-import { uiStateActions } from "./uiState"
+import api from "./api"
+import { authActions } from "./auth"
 
 interface CadastroState {
     cadastro: ICadastro,
@@ -19,8 +22,8 @@ const cadastroTypes = {
     error: 'cadastro/error'
 }
 
-const privateActions = {
-    saveSuccess: createAction<ICadastro>(cadastroTypes.success)
+const actions = {
+    saveSuccess: createAction(cadastroTypes.success)
 }
 
 export const cadastroSlice = createSlice({
@@ -39,8 +42,8 @@ export const cadastroSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(privateActions.saveSuccess, (state, action) => {
-                state.cadastrado = action.payload != null
+            .addCase(actions.saveSuccess, (state) => {
+                state.cadastrado = true
             })
     }
 })
@@ -51,9 +54,13 @@ export const cadastroActions = {
 }
 
 function* request(action: ReturnType<typeof cadastroActions.save>) {
-    yield put(uiStateActions.incluir({ tipo: "ERRO", mensagem: "Teste de mensagem de erro" }))
-    const result = action.payload
-    yield put(privateActions.saveSuccess(result))
+    try {
+        const response: AxiosResponse<IAuth> = yield call(api.post, '/cadastro', action.payload)
+        yield put(authActions.incluir(response.data))
+        yield put(actions.saveSuccess())
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export function* cadastroSaga() {

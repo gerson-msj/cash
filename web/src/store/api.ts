@@ -12,23 +12,44 @@ const api = axios.create({
     baseURL: "/api"
 })
 
+const iniciar = () => {
+    store?.dispatch(uiStateActions.iniciarEspera())
+    store?.dispatch(uiStateActions.ocultarAviso())
+}
+
+const finalizar = <T extends {
+    message: string,
+    response: {
+        data: {
+            message: string
+        }
+    }
+}>(error?: T) => {
+    store?.dispatch(uiStateActions.encerrarEspera())
+    if (error) {
+        store?.dispatch(uiStateActions.exibirAviso({
+            tipo: "ERRO",
+            mensagem: error.response?.data?.message ?? error.message ?? error
+        }))
+    }
+}
+
 api.interceptors.request.use(
     config => {
-        // limpar avisos e iniciar espera
-        store?.dispatch(uiStateActions.remover())
+        iniciar()
         return config
     }, error => {
-        // remover espera e apresentar aviso de erro
+        finalizar(error)
         return Promise.reject(error)
     }
 )
 
 api.interceptors.response.use(
     config => {
-        // remover espera
+        finalizar()
         return config
     }, error => {
-        // remover espera e apresentar aviso de erro
+        finalizar(error)
         return Promise.reject(error)
     }
 )

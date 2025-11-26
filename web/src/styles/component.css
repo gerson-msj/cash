@@ -99,6 +99,29 @@ hr {
   }
 }
 
+div.espera {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 100;
+  animation: esperaFade 2s forwards;
+  animation-delay: 3s;
+}
+
+@keyframes esperaFade {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {

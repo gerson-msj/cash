@@ -1,6 +1,6 @@
+import Espera from './components/Espera'
 import Header from './components/Header'
 import AppRoutes from './routes/AppRoutes'
-import RouteInterceptor from './routes/RouteInterceptor'
 
 function App() {
 
@@ -10,8 +10,8 @@ function App() {
         <Header />
       </header>
       <main>
-        <RouteInterceptor />
         <AppRoutes />
+        <Espera />
       </main>
       <footer></footer>
     </>

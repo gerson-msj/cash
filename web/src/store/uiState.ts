@@ -1,5 +1,7 @@
-import { createAction, createSlice } from "@reduxjs/toolkit"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type IAviso from "../domain/interfaces/IAviso"
+
+const name = 'uiState'
 
 interface state {
     aviso?: IAviso
@@ -11,33 +13,35 @@ const initialState: state = {
     espera: false
 }
 
-const types = {
-    incluir: 'aviso/incluir',
-    remover: 'aviso/remover'
-}
-
-const actions = {
-    incluir: createAction<IAviso>(types.incluir)
-}
-
-export const uiStateSlice = createSlice({
-    name: "UIState",
-    initialState,
-    reducers: {
-        removerAviso: (state: state) => {
-            if (state.aviso)
-                state.aviso = undefined
-        }
+const reducers = {
+    exibirAviso: (state: state, action: PayloadAction<IAviso>) => {
+        state.aviso = { ...action.payload, origem: action.type }
     },
-    extraReducers: (builder) => {
-        builder
-            .addCase(actions.incluir, (state, action) => {
-                state.aviso = action.payload
-            })
-    }
+    ocultarAviso: (state: state) => {
+        if (state.aviso)
+            state.aviso = undefined
+    },
+    iniciarEspera: (state: state) => {
+        if (!state.espera)
+            state.espera = true
+    },
+    encerrarEspera: (state: state) => {
+        if (state.espera)
+            state.espera = false
+    },
+}
+
+const slice = createSlice({
+    name,
+    initialState,
+    reducers
 })
 
+export const uiStateReducer = slice.reducer
+
 export const uiStateActions = {
-    remover: uiStateSlice.actions.removerAviso,
-    incluir: actions.incluir
+    exibirAviso: slice.actions.exibirAviso,
+    ocultarAviso: slice.actions.ocultarAviso,
+    iniciarEspera: slice.actions.iniciarEspera,
+    encerrarEspera: slice.actions.encerrarEspera
 }

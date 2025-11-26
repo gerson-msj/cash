@@ -1,4 +1,4 @@
-export interface ITokenPayload {
+export interface IAuth {
     idIntegrante: number
     idFamilia: number
     nome: string

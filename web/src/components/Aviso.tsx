@@ -4,7 +4,7 @@ import { useAppSelector } from "../hooks"
 
 export default function Aviso() {
 
-    const { aviso } = useAppSelector(state => state.aviso)
+    const { aviso } = useAppSelector(state => state.uiState)
 
     const className = (tipo: AvisoTipo) => {
         return tipo == "SUCESSO" ? "sucesso" : tipo == "ALERTA" ? "alerta" : "erro"
