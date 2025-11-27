@@ -3,6 +3,7 @@
   --header-heading-color-hover: rgb(200, 245, 255);
   --a: rgb(80, 180, 255);
   --a-hover: rgb(70, 225, 255);
+  --border-color: inherit;
 }
 
 h1,
@@ -121,6 +122,36 @@ div.espera {
   }
 
 }
+
+div.msgbox.back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .box {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: larger;
+  }
+}
+
+
+
 
 
 @media (prefers-color-scheme: light) {
