@@ -1,6 +1,6 @@
 import { Application, Request, Response } from "express";
-import { IAuth } from "../domain/types/IAuth";
-import { ICadastro } from "../domain/types/ICadastro";
+import IAuth from "../domain/types/IAuth";
+import ICadastro from "../domain/types/ICadastro";
 import IErro from "../domain/types/IErro";
 import CadastroService from "../services/CadastroService";
 import ControllerBase from "./ControllerBase";

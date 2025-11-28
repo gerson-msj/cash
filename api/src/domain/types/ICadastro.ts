@@ -1,4 +1,4 @@
-export interface ICadastro {
+export default interface ICadastro {
     nome: string
     familia: string
     email: string
