@@ -1,5 +1,7 @@
 import { useEffect, type ChangeEvent } from "react"
+import { useNavigate } from "react-router"
 import Aviso from "../components/Aviso"
+import MsgBox from "../components/MsgBox"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { cadastroActions } from "../store/cadastro"
 import { uiStateActions } from "../store/uiState"
@@ -9,6 +11,7 @@ function Cadastro() {
 
     const { cadastro, cadastrado } = useAppSelector(state => state.cadastro)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     const change = (name: keyof ICadastro, event: ChangeEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value
@@ -19,12 +22,6 @@ function Cadastro() {
     const cadastrar = () => {
         dispatch(cadastroActions.save(cadastro))
     }
-
-    useEffect(() => {
-        if (cadastrado)
-            alert("Cadastro realizado")
-
-    }, [cadastrado])
 
     return (
         <>
@@ -51,6 +48,7 @@ function Cadastro() {
                 </div>
             </form>
             <Aviso />
+            <MsgBox message="Cadastro realizado com sucesso!" onConfirm={() => navigate("/")} />
         </>
     )
 }

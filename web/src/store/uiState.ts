@@ -35,8 +35,8 @@ const reducers = {
         if (state.espera)
             state.espera = false
     },
-    exibirMsgBox: (state: state, action: PayloadAction<{ msgBoxKey: string }>) => {
-        state.msgBox = { ...state.msgBox, [action.payload.msgBoxKey]: true }
+    exibirMsgBox: (state: state, action: PayloadAction<{ msgBoxKey?: string }>) => {
+        state.msgBox = { ...state.msgBox, [action.payload.msgBoxKey ?? 'default']: true }
     },
     ocultarMsgBox: (state: state) => {
         state.msgBox = undefined

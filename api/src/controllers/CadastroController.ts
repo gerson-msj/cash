@@ -32,7 +32,7 @@ class CadastroController extends ControllerBase<CadastroService> {
                 principal: true
             }
 
-            res.cookie("auth", auth, {
+            res.cookie("auth", btoa(JSON.stringify(auth)), {
                 httpOnly: true,
                 secure: false,
                 sameSite: "lax",

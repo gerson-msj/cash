@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../hooks"
 import { uiStateActions } from "../store/uiState"
 
 interface MsgBoxProps {
-    msgBoxKey: string
+    msgBoxKey?: string
     title?: string
     message: string
     ok?: 'Ok' | 'Sim'
@@ -33,7 +33,7 @@ function MsgBox(props: MsgBoxProps) {
 
     return (
         <>
-            {msgBox?.[props.msgBoxKey] && (
+            {msgBox?.[props.msgBoxKey ?? 'default'] && (
                 <div className="msgbox back">
                     <div className="box" onClick={onClickBox}>
                         {props.title && <>

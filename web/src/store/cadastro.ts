@@ -5,6 +5,7 @@ import type { IAuth } from "../domain/interfaces/IAuth"
 import { CadastroDefault, type ICadastro } from "../types"
 import api from "./api"
 import { authActions } from "./auth"
+import { uiStateActions } from "./uiState"
 
 interface CadastroState {
     cadastro: ICadastro,
@@ -26,7 +27,7 @@ const actions = {
     saveSuccess: createAction(cadastroTypes.success)
 }
 
-export const cadastroSlice = createSlice({
+const slice = createSlice({
     name: "cadastro",
     initialState,
     reducers: {
@@ -43,13 +44,15 @@ export const cadastroSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(actions.saveSuccess, (state) => {
-                state.cadastrado = true
+                state.cadastro = CadastroDefault
             })
     }
 })
 
+export const cadastroReducer = slice.reducer
+
 export const cadastroActions = {
-    change: cadastroSlice.actions.changeCadastro,
+    change: slice.actions.changeCadastro,
     save: createAction<ICadastro>(cadastroTypes.request)
 }
 
@@ -58,6 +61,7 @@ function* request(action: ReturnType<typeof cadastroActions.save>) {
         const response: AxiosResponse<IAuth> = yield call(api.post, '/cadastro', action.payload)
         yield put(authActions.incluir(response.data))
         yield put(actions.saveSuccess())
+        yield put(uiStateActions.exibirMsgBox({}))
     } catch (error) {
         console.error(error)
     }
