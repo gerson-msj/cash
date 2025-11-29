@@ -1,4 +1,4 @@
-export interface IAuth {
+export default interface IAuth {
     idIntegrante: number
     idFamilia: number
     nome: string
