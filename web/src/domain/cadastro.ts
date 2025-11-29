@@ -1,8 +1,8 @@
-export interface ICadastro {
+import type { ILogin } from "./login"
+
+export interface ICadastro extends ILogin {
     nome: string
     familia: string
-    email: string
-    senha: string
 }
 
 export const CadastroDefault: ICadastro = {

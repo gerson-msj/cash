@@ -1,5 +1,5 @@
 import { createAction, createSlice, type ActionReducerMapBuilder } from "@reduxjs/toolkit";
-import type { IAuth } from "../domain/interfaces/IAuth";
+import type { IAuth } from "../domain/auth";
 
 interface state {
     auth?: IAuth

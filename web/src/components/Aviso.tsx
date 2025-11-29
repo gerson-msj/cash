@@ -1,5 +1,5 @@
-import type IAviso from "../domain/interfaces/IAviso"
-import type { AvisoTipo } from "../domain/interfaces/IAviso"
+import type IAviso from "../domain/aviso"
+import type { AvisoTipo } from "../domain/aviso"
 import { useAppSelector } from "../hooks"
 
 export default function Aviso() {

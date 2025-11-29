@@ -1,15 +1,15 @@
-import { useEffect, type ChangeEvent } from "react"
+import type { ChangeEvent } from "react"
 import { useNavigate } from "react-router"
 import Aviso from "../components/Aviso"
 import MsgBox from "../components/MsgBox"
+import type { ICadastro } from "../domain/cadastro"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { cadastroActions } from "../store/cadastro"
 import { uiStateActions } from "../store/uiState"
-import type { ICadastro } from "../types"
 
 function Cadastro() {
 
-    const { cadastro, cadastrado } = useAppSelector(state => state.cadastro)
+    const { cadastro } = useAppSelector(state => state.cadastro)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 

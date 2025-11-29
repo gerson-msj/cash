@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import type IAviso from "../domain/interfaces/IAviso"
+import type IAviso from "../domain/aviso"
 
 const name = 'uiState'
 
