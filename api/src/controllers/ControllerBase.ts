@@ -1,4 +1,5 @@
-import { Application, Router } from "express"
+import { Application, Response, Router } from "express"
+import IErro from "../domain/erro"
 
 abstract class ControllerBase<TService> {
     protected service: TService
@@ -15,6 +16,17 @@ abstract class ControllerBase<TService> {
         this.app.use('/api', this.router)
     }
 
+    protected badRequest(res: Response<IErro>, message: string) {
+        return res.status(400).json({ message: message })
+    }
+
+    protected serverError(res: Response<IErro>, message: string) {
+        return res.status(500).json({ message: message })
+    }
+
+    protected OkEmpty(res: Response) {
+        return res.status(204).send()
+    }
 
 }
 

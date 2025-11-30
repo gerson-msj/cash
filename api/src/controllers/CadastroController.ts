@@ -1,7 +1,7 @@
 import { Application, Request, Response } from "express";
-import IAuth from "../domain/types/IAuth";
-import ICadastro from "../domain/types/ICadastro";
-import IErro from "../domain/types/IErro";
+import IAuth from "../domain/auth";
+import ICadastro from "../domain/cadastro";
+import IErro from "../domain/erro";
 import CadastroService from "../services/CadastroService";
 import ControllerBase from "./ControllerBase";
 
@@ -19,7 +19,7 @@ class CadastroController extends ControllerBase<CadastroService> {
         const integranteExistente = await this.service.integranteExistente(req.body.email)
 
         if (integranteExistente) {
-            return res.status(400).json({ message: "O email informado já está em uso." })
+            return this.badRequest(res, 'O email informado já está em uso.')
         }
 
         try {
@@ -43,7 +43,7 @@ class CadastroController extends ControllerBase<CadastroService> {
             return res.json(auth)
         } catch (error) {
             console.error("CadastroController.Post", error)
-            return res.status(500).json({ message: "Houve uma falha interna ao realizar o cadastro" })
+            return this.serverError(res, 'Houve uma falha interna ao realizar o cadastro')
         }
     }
 

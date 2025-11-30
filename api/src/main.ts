@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import express, { Application } from "express"
 import CadastroController from "./controllers/CadastroController"
 import FamiliaController from "./controllers/FamiliaController"
+import LoginController from "./controllers/LoginController"
 import { AppDataSource } from "./database/data-source"
 
 class AppBootstrap {
@@ -18,6 +19,7 @@ class AppBootstrap {
     initializeControllers() {
         new FamiliaController(this.app)
         new CadastroController(this.app)
+        new LoginController(this.app)
     }
 
     async initializeApp(): Promise<void> {

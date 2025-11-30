@@ -7,7 +7,7 @@ import { cadastroReducer, cadastroSaga } from "./cadastro";
 import { loginReducer, loginSaga } from "./login";
 import { uiStateReducer } from "./uiState";
 
-const sagaMiddleware = createSagaMiddleware();
+export const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
     reducer: combineReducers({

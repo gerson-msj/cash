@@ -20,7 +20,7 @@ function Cadastro() {
     }
 
     const cadastrar = () => {
-        dispatch(cadastroActions.save(cadastro))
+        dispatch(cadastroActions.save())
     }
 
     return (

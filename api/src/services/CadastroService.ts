@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../database/data-source";
+import ICadastro from "../domain/cadastro";
 import FamiliaEntity from "../domain/entities/FamiliaEntity";
 import IntegranteEntity from "../domain/entities/IntegranteEntity";
-import { ICadastro } from "../domain/types/ICadastro";
 
 export default class CadastroService {
 

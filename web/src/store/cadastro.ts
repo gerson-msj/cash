@@ -1,9 +1,10 @@
 import { createAction, createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { AxiosResponse } from "axios"
-import { call, put, takeLatest } from "redux-saga/effects"
+import { call, getContext, put, select, takeLatest } from "redux-saga/effects"
+import type { RootState } from "."
 import type { IAuth } from "../domain/auth"
 import { CadastroDefault, type ICadastro } from "../domain/cadastro"
-import api from "./api"
+import type { ISagaContext } from "../domain/sagaContext"
 import { authActions } from "./auth"
 import { uiStateActions } from "./uiState"
 
@@ -37,12 +38,16 @@ export const cadastroReducer = slice.reducer
 
 export const cadastroActions = {
     change: slice.actions.change,
-    save: createAction<ICadastro>(`${name}/save`)
+    //save: createAction<ICadastro>(`${name}/save`)
+    save: createAction(`${name}/save`)
 }
 
-function* request(action: ReturnType<typeof cadastroActions.save>) {
+// action: ReturnType<typeof cadastroActions.save>
+function* request() {
+    const { api }: ISagaContext = yield getContext('ctx')
     try {
-        const response: AxiosResponse<IAuth> = yield call(api.post, '/cadastro', action.payload)
+        const cadastro: ICadastro = yield select((state: RootState) => state.cadastro.cadastro)
+        const response: AxiosResponse<IAuth> = yield call(api.post, '/cadastro', cadastro)
         yield put(authActions.incluir(response.data))
         yield put(uiStateActions.exibirMsgBox({}))
     } catch (error) {

@@ -1,23 +1,20 @@
 import { createAction, createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { AxiosResponse } from "axios"
-import { type NavigateFunction } from "react-router"
-import { call, put, select, takeLatest } from "redux-saga/effects"
+import { call, getContext, put, select, takeLatest } from "redux-saga/effects"
 import type { RootState } from "."
 import type { IAuth } from "../domain/auth"
 import { LoginDefault, type ILogin } from "../domain/login"
-import api from "./api"
+import type { ISagaContext } from "../domain/sagaContext"
 import { authActions } from "./auth"
 
 const name = 'login'
 
 interface state {
-    login: ILogin,
-    loginOk: boolean
+    login: ILogin
 }
 
 const initialState: state = {
-    login: LoginDefault,
-    loginOk: false
+    login: LoginDefault
 }
 
 const reducers = {
@@ -37,15 +34,27 @@ export const loginReducer = slice.reducer
 
 export const loginActions = {
     change: slice.actions.change,
-    login: createAction<{ navigate: NavigateFunction }>(`${name}/login`)
+    login: createAction(`${name}/login`),
+    logout: createAction(`${name}/logout`)
 }
 
-function* login(action: ReturnType<typeof loginActions.login>) {
+function* login() {
+    const { navigate, api }: ISagaContext = yield getContext('ctx')
     try {
         const login: ILogin = yield select((state: RootState) => state.login.login)
         const response: AxiosResponse<IAuth> = yield call(api.post, '/login', login)
         yield put(authActions.incluir(response.data))
-        action.payload.navigate('/')
+        navigate('/')
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+function* logout() {
+    const { api }: ISagaContext = yield getContext('ctx')
+    try {
+        yield call(api.delete, '/login')
+        yield put(authActions.remover())
     } catch (error) {
         console.error(error)
     }
@@ -53,4 +62,5 @@ function* login(action: ReturnType<typeof loginActions.login>) {
 
 export function* loginSaga() {
     yield takeLatest(loginActions.login.type, login)
+    yield takeLatest(loginActions.logout.type, logout)
 }

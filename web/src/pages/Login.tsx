@@ -20,12 +20,12 @@ function Login() {
     }
 
     const doLogin = () => {
-        dispatch(loginActions.login({ navigate }))
+        dispatch(loginActions.login())
     }
 
     const cadastro = () => {
         dispatch(cadastroActions.change({ name: "email", value: login.email }))
-        navigate('/cadstro')
+        navigate('/cadastro')
     }
 
     return (
