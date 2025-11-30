@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import { apiInjectStore } from "./api";
-import { authReducer } from "./auth";
+import { authReducer, authSaga } from "./auth";
 import { cadastroReducer, cadastroSaga } from "./cadastro";
 import { loginReducer, loginSaga } from "./login";
 import { uiStateReducer } from "./uiState";
@@ -24,7 +24,8 @@ apiInjectStore(store)
 function* rootSaga() {
     yield all([
         cadastroSaga(),
-        loginSaga()
+        loginSaga(),
+        authSaga(),
     ])
 }
 

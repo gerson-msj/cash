@@ -51,10 +51,11 @@ function* login() {
 }
 
 function* logout() {
-    const { api }: ISagaContext = yield getContext('ctx')
+    const { navigate, api }: ISagaContext = yield getContext('ctx')
     try {
         yield call(api.delete, '/login')
         yield put(authActions.remover())
+        navigate('/')
     } catch (error) {
         console.error(error)
     }

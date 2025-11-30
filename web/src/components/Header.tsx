@@ -1,6 +1,8 @@
 import { Link } from "react-router"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { loginActions } from "../store/login"
+import { uiStateActions } from "../store/uiState"
+import MsgBox from "./MsgBox"
 
 function Header() {
 
@@ -13,19 +15,34 @@ function Header() {
                 <h1>Cash</h1>
             </Link>
             <nav>
+                {
+                    auth && (
+                        <>
+                            <Link to="/config">
+                                Configurações
+                            </Link>
+                            {' | '}
+
+                        </>
+                    )
+                }
                 <Link
                     to={auth ? '#' : '/login'}
                     onClick={(e) => {
                         if (auth) {
-                            // alterar para questionar se deseja sair.
                             e.preventDefault()
-                            dispatch(loginActions.logout())
+                            dispatch(uiStateActions.exibirMsgBox({}))
                         }
                     }}>
                     {auth ? 'Sair' : 'Entrar'}
                 </Link>
             </nav>
             <div className="line" />
+            <MsgBox
+                message="Deseja realmente sair?"
+                ok="Sim" cancel="Não"
+                onConfirm={() => dispatch(loginActions.logout())}
+            />
         </>
     )
 }

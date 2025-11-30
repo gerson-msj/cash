@@ -7,6 +7,7 @@ import type { ISagaContext } from './domain/sagaContext'
 import AppRoutes from './routes/AppRoutes'
 import { sagaMiddleware } from './store'
 import api from './store/api'
+import { authActions } from './store/auth'
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
   })
 
   useEffect(() => {
-    // Chamar auth para verificar se existe token, via api, e resgatar o auth.
+    dispatch(authActions.verificar(location.pathname))
   }, [location.pathname, dispatch])
 
   return (
