@@ -1,9 +1,9 @@
 import { createAction, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { getContext, select, takeLatest } from "redux-saga/effects";
+import type { AxiosResponse } from "axios";
+import { call, getContext, select, takeLatest } from "redux-saga/effects";
 import type { RootState } from ".";
 import type { IAuth } from "../domain/auth";
 import type { ISagaContext } from "../domain/sagaContext";
-import { freePaths } from "../routes/AppRoutes";
 
 const name = 'auth'
 
@@ -45,11 +45,13 @@ function* verificar(action: ReturnType<typeof authActions.verificar>) {
 
     const auth: IAuth | undefined = yield select((state: RootState) => state.auth.auth)
 
-    if (freePaths.includes(pathname) || auth) return
+    // if (freePaths.includes(pathname) || auth) return
 
     const { navigate, api }: ISagaContext = yield getContext('ctx')
+    const response: AxiosResponse<IAuth | undefined> = yield call(api.get, '/auth')
+    console.log(response.data)
 
-    navigate('/')
+    //navigate('/')
     /**
      * Obter auth da api
      *  Se houver, armazenar na store auth

@@ -1,6 +1,7 @@
 import cookieParser from "cookie-parser"
 import dotenv from "dotenv"
 import express, { Application } from "express"
+import AuthController from "./controllers/AuthController"
 import CadastroController from "./controllers/CadastroController"
 import FamiliaController from "./controllers/FamiliaController"
 import LoginController from "./controllers/LoginController"
@@ -20,6 +21,7 @@ class AppBootstrap {
         new FamiliaController(this.app)
         new CadastroController(this.app)
         new LoginController(this.app)
+        new AuthController(this.app)
     }
 
     async initializeApp(): Promise<void> {
