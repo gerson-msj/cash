@@ -15,5 +15,6 @@
         "$shared": {
             "host": "http://localhost:3000/api"
         }
-    }
+    },
+    "rest-client.rememberCookiesForSubsequentRequests": true
 }

@@ -1,11 +1,12 @@
 import { createAction, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { AxiosResponse } from "axios";
-import { call, getContext, select, takeLatest } from "redux-saga/effects";
+import { call, getContext, put, select, takeLatest } from "redux-saga/effects";
 import type { RootState } from ".";
 import type { IAuth } from "../domain/auth";
 import type { ISagaContext } from "../domain/sagaContext";
 
 const name = 'auth'
+const freePaths = ['/login', '/cadastro']
 
 interface state {
     auth?: IAuth
@@ -39,25 +40,20 @@ export const authActions = {
 
 function* verificar(action: ReturnType<typeof authActions.verificar>) {
 
+    const path = action.payload
+    if (freePaths.includes(path)) return
 
-
-    const pathname = action.payload
-
-    const auth: IAuth | undefined = yield select((state: RootState) => state.auth.auth)
-
-    // if (freePaths.includes(pathname) || auth) return
+    let auth: IAuth | undefined = yield select((state: RootState) => state.auth.auth)
+    if (auth) return
 
     const { navigate, api }: ISagaContext = yield getContext('ctx')
     const response: AxiosResponse<IAuth | undefined> = yield call(api.get, '/auth')
-    console.log(response.data)
-
-    //navigate('/')
-    /**
-     * Obter auth da api
-     *  Se houver, armazenar na store auth
-     *  Se não houver e não for path '/', retornar para '/'.
-     */
-
+    auth = response.data
+    if (auth) {
+        yield put(authActions.incluir(auth))
+    } else if (path !== '/') {
+        navigate('/')
+    }
 }
 
 export function* authSaga() {

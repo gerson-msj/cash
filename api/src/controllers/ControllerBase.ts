@@ -1,4 +1,5 @@
-import { Application, Response, Router } from "express"
+import { Application, Request, Response, Router } from "express"
+import IAuth from "../domain/auth"
 import IErro from "../domain/erro"
 
 abstract class ControllerBase<TService> {
@@ -24,8 +25,21 @@ abstract class ControllerBase<TService> {
         return res.status(500).json({ message: message })
     }
 
+    protected unauthorized(res: Response<IErro>) {
+        return res.status(401).json({ message: 'Não autorizado' })
+    }
+
     protected OkEmpty(res: Response) {
         return res.status(204).send()
+    }
+
+    protected auth(req: Request): IAuth | undefined {
+        const authCookie = req.signedCookies['auth']
+        if (!authCookie) {
+            return undefined
+        }
+
+        return JSON.parse(atob(authCookie)) as IAuth
     }
 
 }

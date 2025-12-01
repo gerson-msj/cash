@@ -1,0 +1,16 @@
+.config {
+    h3 {
+        margin: 10px 0 0 10px;
+    }
+
+    form {
+        margin: 0 15px;
+    }
+}
+
+.config-body {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}

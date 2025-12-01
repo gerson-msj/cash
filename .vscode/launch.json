@@ -26,37 +26,6 @@
             "webRoot": "${workspaceFolder}/web",
             "userDataDir": "${workspaceFolder}/web/.vscode/chrome-profile-data",
             "preLaunchTask": "web"
-        },
-        {
-            "name": "vite",
-            "type": "node-terminal",
-            "request": "launch",
-            "command": "yarn run dev",
-            "cwd": "${workspaceFolder}/web",
-            "serverReadyAction": {
-                "pattern": "Local:\\s+(http?://\\S+)",
-                "uriFormat": "%s",
-                "action": "debugWithChrome",
-            },
-        },
-        {
-            "name": "web ff",
-            "type": "firefox",
-            "request": "launch",
-            "url": "http://localhost:5173",
-            "webRoot": "${workspaceFolder}/web/src",
-            "preLaunchTask": "web ff",
-            "reAttach": true,
-            "reloadOnAttach": true,
-            "keepProfileChanges": true,
-            "firefoxExecutable": "/usr/bin/firefox",
-            "profileDir": "${workspaceFolder}/web/.vscode/firefox-profile",
-            "pathMappings": [
-                {
-                    "url": "http://localhost:5173/src",
-                    "path": "${workspaceFolder}/web/src"
-                }
-            ]
         }
     ]
 }

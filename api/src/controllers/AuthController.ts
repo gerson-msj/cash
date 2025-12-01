@@ -1,5 +1,4 @@
 import { Application, Request, Response } from "express";
-import IAuth from "../domain/auth";
 import AuthService from "../services/AuthService";
 import ControllerBase from "./ControllerBase";
 
@@ -11,17 +10,22 @@ export default class AuthController extends ControllerBase<AuthService> {
         this.registerRoutes()
     }
 
-    get = async (req: Request, resp: Response) => {
+    get = async (req: Request, res: Response) => {
+        try {
+            const auth = this.auth(req);
+            if (!auth) {
+                return this.OkEmpty(res)
+            }
 
-        let auth: IAuth | undefined = undefined
-
-        const authCookie = req.signedCookies.auth
-        if (!authCookie) {
-            return resp.json(auth)
+            return res.json(auth)
+        } catch (error) {
+            console.log(error)
+            res.clearCookie("auth", {
+                httpOnly: true,
+                sameSite: "lax",
+                signed: true
+            });
+            return this.OkEmpty(res)
         }
-
-        auth = JSON.parse(atob(authCookie)) as IAuth
-
-        return resp.json(auth)
     }
 }
