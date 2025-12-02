@@ -17,9 +17,6 @@ export default class ConfigController extends ControllerBase<ConfigService> {
         if (!auth)
             return this.unauthorized(res)
 
-
-
-
-
+        return this.OkEmpty(res)
     }
 }

@@ -1,3 +1,17 @@
+### GET Config
+GET {{host}}/config
+
+### POST Login
+POST {{host}}/login
+Content-Type: application/json
+
+{
+    "email": "gerson.msj@gmail.com",
+    "senha": "gerson"
+}
+
+### DELETE Login
+DELETE {{host}}/login
 
 ### POST Cadastro
 POST {{host}}/cadastro
