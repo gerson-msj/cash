@@ -1,11 +1,9 @@
-import { createAction, createSlice } from "@reduxjs/toolkit"
+import { createAction, createSlice, type ActionReducerMapBuilder } from "@reduxjs/toolkit"
 import type { AxiosResponse } from "axios"
 import { call, getContext, put, takeLatest } from "redux-saga/effects"
 import type IFamilia from "../domain/familia"
 import { familiaDefault } from "../domain/familia"
 import type { ISagaContext } from "../domain/sagaContext"
-import { authActions } from "./auth"
-import { uiStateActions } from "./uiState"
 
 const name = 'config'
 
@@ -19,16 +17,18 @@ const initialState: IState = {
 
 const reducers = {}
 
-const actions
+const extraActions = {
+    requestSuccess: createAction<IFamilia>(`${name}/requestSuccess`)
+}
 
-// const extraReducers = (builder: ActionReducerMapBuilder) => {
-
-// }
+const extraReducers = (builder: ActionReducerMapBuilder<IState>) => {
+    builder.addCase(extraActions.requestSuccess, (state, action) => {
+        state.familia = action.payload
+    })
+}
 
 const slice = createSlice({
-    name, initialState, reducers, extraReducers(builder) {
-        builder.addCase(createAction(`${name}/requestSuccess`), (sta))
-    },
+    name, initialState, reducers, extraReducers
 })
 
 export const configReducer = slice.reducer
@@ -40,9 +40,18 @@ export const configActions = {
 function* request() {
     const { api }: ISagaContext = yield getContext('ctx')
     try {
+
+        /* -- Exemplo yield all
+        const effects = [
+            call(api.get, '/config'),
+            select((state: RootState) => state.auth.auth),
+        ]
+        // Tuplas tipadas [a, b]: [tipoA, tipoB]
+        const [response, auth]: [AxiosResponse<IFamilia>, IAuth | undefined] = yield all(effects)
+        */
+
         const response: AxiosResponse<IFamilia> = yield call(api.get, '/config')
-        yield put(authActions.incluir(response.data))
-        yield put(uiStateActions.exibirMsgBox({}))
+        yield put(extraActions.requestSuccess(response.data))
     } catch (error) {
         console.error(error)
     }

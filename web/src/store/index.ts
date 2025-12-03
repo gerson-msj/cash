@@ -4,6 +4,7 @@ import { all } from "redux-saga/effects";
 import { apiInjectStore } from "./api";
 import { authReducer, authSaga } from "./auth";
 import { cadastroReducer, cadastroSaga } from "./cadastro";
+import { configReducer, configSaga } from "./config";
 import { loginReducer, loginSaga } from "./login";
 import { uiStateReducer } from "./uiState";
 
@@ -14,7 +15,8 @@ export const store = configureStore({
         uiState: uiStateReducer,
         auth: authReducer,
         cadastro: cadastroReducer,
-        login: loginReducer
+        login: loginReducer,
+        config: configReducer,
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
@@ -26,6 +28,7 @@ function* rootSaga() {
         cadastroSaga(),
         loginSaga(),
         authSaga(),
+        configSaga(),
     ])
 }
 

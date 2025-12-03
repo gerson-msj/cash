@@ -1,6 +1,7 @@
 import type { Store } from "@reduxjs/toolkit";
 import axios from "axios";
 import type { RootState } from ".";
+import { loginActions } from "./login";
 import { uiStateActions } from "./uiState";
 
 let store: Store<RootState> | undefined
@@ -18,6 +19,7 @@ const iniciar = () => {
 }
 
 const finalizar = <T extends {
+    status: number,
     message: string,
     response: {
         data: {
@@ -26,6 +28,12 @@ const finalizar = <T extends {
     }
 }>(error?: T) => {
     store?.dispatch(uiStateActions.encerrarEspera())
+
+    if (error?.status === 401) {
+        store?.dispatch(loginActions.logout())
+        return
+    }
+
     if (error) {
         store?.dispatch(uiStateActions.exibirAviso({
             tipo: "ERRO",
