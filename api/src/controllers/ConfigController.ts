@@ -17,6 +17,15 @@ export default class ConfigController extends ControllerBase<ConfigService> {
         if (!auth)
             return this.unauthorized(res)
 
-        return this.OkEmpty(res)
+        const familia = await this.service.obterFamilia(auth.idFamilia)
+        if (!familia) {
+            return this.badRequest(res, "Família não localizada.")
+        }
+
+        familia.integrantes?.forEach(i => delete i.senha)
+
+        return familia
+            ? res.json(familia)
+            : this.badRequest(res, "Família não localizada.")
     }
 }

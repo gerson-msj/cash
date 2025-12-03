@@ -11,7 +11,7 @@ export default class IntegranteEntity extends EntityBaseName {
     email: string = ''
 
     @Column({ nullable: false, length: 20 })
-    senha: string = ''
+    senha?: string = ''
 
     @Column({ nullable: false })
     principal: boolean = false
