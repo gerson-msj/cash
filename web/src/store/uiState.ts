@@ -3,20 +3,22 @@ import type IAviso from "../domain/aviso"
 
 const name = 'uiState'
 
-type MsgBoxType = {
-    [msgBoxKey: string]: boolean
+type componentBoolType = {
+    [componentKey: string]: boolean
 }
 
 interface state {
     aviso?: IAviso
     espera: boolean
-    msgBox?: MsgBoxType
+    msgBox?: Record<string, boolean>
+    buttonConfirmDisabled: Record<string, boolean>
 }
 
 const initialState: state = {
     aviso: undefined,
     espera: false,
-    msgBox: undefined
+    msgBox: undefined,
+    buttonConfirmDisabled: {}
 }
 
 const reducers = {
@@ -35,11 +37,19 @@ const reducers = {
         if (state.espera)
             state.espera = false
     },
-    exibirMsgBox: (state: state, action: PayloadAction<{ msgBoxKey?: string }>) => {
-        state.msgBox = { ...state.msgBox, [action.payload.msgBoxKey ?? 'default']: true }
+    exibirMsgBox: (state: state, action: PayloadAction<{ componentKey?: string }>) => {
+        state.msgBox = { ...state.msgBox, [action.payload.componentKey ?? 'default']: true }
     },
     ocultarMsgBox: (state: state) => {
         state.msgBox = undefined
+    },
+    buttonConfirmDisabled: (state: state, action: PayloadAction<{ componentKey?: string, disabled: boolean }>) => {
+        const { componentKey, disabled } = action.payload
+        const key = componentKey ?? 'default'
+        if (!disabled)
+            delete state.buttonConfirmDisabled[key]
+        else
+            state.buttonConfirmDisabled[key] = true
     }
 }
 
@@ -58,4 +68,5 @@ export const uiStateActions = {
     encerrarEspera: slice.actions.encerrarEspera,
     exibirMsgBox: slice.actions.exibirMsgBox,
     ocultarMsgBox: slice.actions.ocultarMsgBox,
+    buttonConfirmDisabled: slice.actions.buttonConfirmDisabled
 }
