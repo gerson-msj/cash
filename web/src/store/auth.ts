@@ -10,17 +10,19 @@ const freePaths = ['/login', '/cadastro']
 
 interface state {
     auth?: IAuth,
-    principal?: boolean
+    principal: boolean
 }
 
-const initialState: state = {}
+const initialState: state = {
+    principal: false
+}
 
 const reducers = {
     remover: (state: state) => {
         if (state.auth)
             state.auth = undefined
 
-        state.principal = undefined
+        state.principal = false
     }
 }
 
@@ -42,6 +44,7 @@ const authSlice = createSlice({
 export const authReducer = authSlice.reducer
 
 export const authActions = {
+    incluir: extraActions.incluir,
     remover: authSlice.actions.remover,
     verificar: createAction<string>(`${name}/verificar`)
 }

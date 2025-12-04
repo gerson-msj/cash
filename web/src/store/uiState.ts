@@ -3,10 +3,6 @@ import type IAviso from "../domain/aviso"
 
 const name = 'uiState'
 
-type componentBoolType = {
-    [componentKey: string]: boolean
-}
-
 interface state {
     aviso?: IAviso
     espera: boolean
@@ -46,10 +42,10 @@ const reducers = {
     buttonConfirmDisabled: (state: state, action: PayloadAction<{ componentKey?: string, disabled: boolean }>) => {
         const { componentKey, disabled } = action.payload
         const key = componentKey ?? 'default'
-        if (!disabled)
-            delete state.buttonConfirmDisabled[key]
-        else
-            state.buttonConfirmDisabled[key] = true
+        // if (!disabled)
+        //     delete state.buttonConfirmDisabled[key]
+        // else
+        state.buttonConfirmDisabled[key] = disabled
     }
 }
 

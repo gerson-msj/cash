@@ -1,4 +1,4 @@
-import { createAction, createSlice, type ActionReducerMapBuilder } from "@reduxjs/toolkit"
+import { createAction, createSlice, type ActionReducerMapBuilder, type PayloadAction } from "@reduxjs/toolkit"
 import type { AxiosResponse } from "axios"
 import { call, getContext, put, takeLatest } from "redux-saga/effects"
 import type IFamilia from "../domain/familia"
@@ -15,7 +15,12 @@ const initialState: IState = {
     familia: familiaDefault
 }
 
-const reducers = {}
+const reducers = {
+    alterarFamilia: (state: IState, action: PayloadAction<string>) => {
+        state.familia.nome = action.payload
+        console.log('alterarFamilia')
+    }
+}
 
 const extraActions = {
     requestSuccess: createAction<IFamilia>(`${name}/requestSuccess`)
@@ -34,7 +39,8 @@ const slice = createSlice({
 export const configReducer = slice.reducer
 
 export const configActions = {
-    request: createAction(`${name}/request`)
+    request: createAction(`${name}/request`),
+    alterarFamilia: slice.actions.alterarFamilia,
 }
 
 function* request() {
