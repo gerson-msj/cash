@@ -1,11 +1,12 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm"
-import Categoria from "./Categoria"
-import Conta from "./Conta"
-import EntityBaseName from "./EntityBaseName"
+import IIntegrante from "../integrante"
+import BaseEntityName from "./BaseEntityName"
+import CategoriaEntity from "./CategoriaEntity"
+import ContaEntity from "./ContaEntity"
 import FamiliaEntity from "./FamiliaEntity"
 
 @Entity('integrantes')
-export default class IntegranteEntity extends EntityBaseName {
+export default class IntegranteEntity extends BaseEntityName implements IIntegrante {
 
     @Column({ unique: true, nullable: false, length: 80 })
     email: string = ''
@@ -26,15 +27,15 @@ export default class IntegranteEntity extends EntityBaseName {
     })
     familia?: FamiliaEntity
 
-    @OneToMany(() => Conta, (conta) => conta.integrante, {
+    @OneToMany(() => ContaEntity, (conta) => conta.integrante, {
         cascade: true,
         eager: true
     })
-    contas?: Conta[]
+    contas?: ContaEntity[]
 
-    @OneToMany(() => Categoria, (categoria) => categoria.integrante, {
+    @OneToMany(() => CategoriaEntity, (categoria) => categoria.integrante, {
         cascade: true,
         eager: true
     })
-    categorias?: Categoria[]
+    categorias?: CategoriaEntity[]
 }

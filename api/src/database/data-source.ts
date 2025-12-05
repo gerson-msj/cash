@@ -1,9 +1,9 @@
 import { DataSource, DataSourceOptions } from "typeorm";
-import Categoria from "../domain/entities/Categoria";
-import Conta from "../domain/entities/Conta";
+import CategoriaEntity from "../domain/entities/CategoriaEntity";
+import ContaEntity from "../domain/entities/ContaEntity";
 import FamiliaEntity from "../domain/entities/FamiliaEntity";
 import IntegranteEntity from "../domain/entities/IntegranteEntity";
-import Movimento from "../domain/entities/Movimento";
+import Movimento from "../domain/entities/MovimentoEntity";
 
 const options: DataSourceOptions = {
     type: 'sqlite',
@@ -12,8 +12,8 @@ const options: DataSourceOptions = {
     entities: [
         FamiliaEntity,
         IntegranteEntity,
-        Conta,
-        Categoria,
+        ContaEntity,
+        CategoriaEntity,
         Movimento,
     ],
     subscribers: [],

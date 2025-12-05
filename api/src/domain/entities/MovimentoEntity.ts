@@ -1,12 +1,12 @@
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne } from "typeorm";
 import { RepasseTipo } from "../enums";
-import Categoria from "./Categoria";
-import Conta from "./Conta";
-import EntityBase from "./EntityBase";
+import BaseEntity from "./BaseEntity";
+import CategoriaEntity from "./CategoriaEntity";
+import ContaEntity from "./ContaEntity";
 import IntegranteEntity from "./IntegranteEntity";
 
 @Entity('movimento')
-export default class Movimento extends EntityBase {
+export default class Movimento extends BaseEntity {
 
     @Column()
     ano!: number
@@ -20,23 +20,23 @@ export default class Movimento extends EntityBase {
     @Column()
     descricao!: string
 
-    @ManyToOne(() => Categoria, {
+    @ManyToOne(() => CategoriaEntity, {
         onDelete: 'RESTRICT'
     })
     @JoinColumn({
         name: 'id_categoria',
         foreignKeyConstraintName: 'fk_categoria_movimento'
     })
-    categoria!: Categoria
+    categoria!: CategoriaEntity
 
-    @ManyToOne(() => Conta, {
+    @ManyToOne(() => ContaEntity, {
         onDelete: 'RESTRICT'
     })
     @JoinColumn({
         name: 'id_conta',
         foreignKeyConstraintName: 'fk_conta_movimento'
     })
-    conta!: Conta
+    conta!: ContaEntity
 
     @Column()
     valor!: number

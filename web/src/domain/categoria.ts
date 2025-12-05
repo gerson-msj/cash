@@ -1,8 +1,7 @@
-import type IModelEntityBase from "./modelEntityBase"
+import type IBaseName from "./baseName"
 
 export type CategoriaTipo = 'RECEITA' | 'DESPESA' | 'APORTE' | 'RETIRADA' | 'REALOCACAO'
 
-export default interface ICategoria extends IModelEntityBase {
-    nome: string
+export default interface ICategoria extends IBaseName {
     categoriaTipo: CategoriaTipo
 }

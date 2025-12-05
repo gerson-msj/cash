@@ -1,10 +1,11 @@
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import ICategoria from "../categoria";
 import { CategoriaTipo } from "../enums";
-import EntityBaseName from "./EntityBaseName";
+import BaseEntityName from "./BaseEntityName";
 import IntegranteEntity from "./IntegranteEntity";
 
 @Entity('categorias')
-export default class Categoria extends EntityBaseName {
+export default class CategoriaEntity extends BaseEntityName implements ICategoria {
 
     @Column({ name: 'categoria_tipo', enum: CategoriaTipo, type: 'varchar' })
     categoriaTipo!: CategoriaTipo

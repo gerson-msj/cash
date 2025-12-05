@@ -1,9 +1,8 @@
-import type IModelEntityBase from "./modelEntityBase"
+import type IBaseName from "./baseName"
 
 export type ContaTipo = 'DEBITO' | 'CREDITO' | 'RESERVA'
 
-export default interface IConta extends IModelEntityBase {
-    nome: string
+export default interface IConta extends IBaseName {
     contaTipo: ContaTipo
     diaVencimentoCredito?: number
     saldo: number

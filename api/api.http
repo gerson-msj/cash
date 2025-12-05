@@ -1,6 +1,15 @@
 ### GET Config
 GET {{host}}/config
 
+### POST Config
+POST {{host}}/config
+Content-Type: application/json
+
+{
+    "nome": "Moraes 02"
+}
+
+
 ### POST Login
 POST {{host}}/login
 Content-Type: application/json

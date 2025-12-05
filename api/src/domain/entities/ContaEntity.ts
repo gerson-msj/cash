@@ -1,10 +1,11 @@
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import IConta from "../conta";
 import { ContaTipo } from "../enums";
-import EntityBaseName from "./EntityBaseName";
+import BaseEntityName from "./BaseEntityName";
 import IntegranteEntity from "./IntegranteEntity";
 
 @Entity('contas')
-export default class Conta extends EntityBaseName {
+export default class ContaEntity extends BaseEntityName implements IConta {
 
     @Column({ name: 'conta_tipo', enum: ContaTipo, type: 'varchar' })
     contaTipo!: ContaTipo
