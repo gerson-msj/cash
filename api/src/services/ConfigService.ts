@@ -16,4 +16,16 @@ export default class ConfigService {
             loadEagerRelations: true
         })
     }
+
+    public async salvar(entity: FamiliaEntity): Promise<FamiliaEntity> {
+
+
+
+        const result = await AppDataSource.transaction(async manager => {
+            const saved = await manager.save(entity)
+            return saved
+        })
+
+        return result
+    }
 }

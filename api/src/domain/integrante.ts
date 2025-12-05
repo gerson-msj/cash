@@ -7,6 +7,6 @@ export default interface IIntegrante extends IModelEntityBase {
     email: string
     senha?: string
     principal: boolean
-    contas?: IConta[]
-    categorias?: ICategoria[]
+    contas: IConta[]
+    categorias: ICategoria[]
 }

@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../database/data-source";
 import FamiliaEntity from "../domain/entities/FamiliaEntity";
-import FamiliaModel from "../domain/models/FamiliaModel";
+import IFamilia from "../domain/familia";
 
 export default class FamiliaService {
 
@@ -9,16 +9,16 @@ export default class FamiliaService {
         return AppDataSource.getRepository(FamiliaEntity)
     }
 
-    async getData(): Promise<FamiliaModel[]> {
+    async getData(): Promise<IFamilia[]> {
 
         const entities = await this.repository.find()
-        const models = entities.map<FamiliaModel>(e => {
+        const models = entities.map<IFamilia>(e => {
             return { ...e }
         })
         return models
     }
 
-    async syncData(models: FamiliaModel[]): Promise<FamiliaModel[]> {
+    async syncData(models: IFamilia[]): Promise<IFamilia[]> {
 
         /** ### Modelos para **upsert**
          * - Não marcados para remoção.
@@ -42,10 +42,10 @@ export default class FamiliaService {
             const savedEntities = await manager.save(entitiesToSave)
             const removedEntities = await manager.remove(entitiesToRemove)
             return [
-                ...savedEntities.map<FamiliaModel>(e => {
+                ...savedEntities.map<IFamilia>(e => {
                     return { ...e }
                 }),
-                ...removedEntities.map<FamiliaModel>(e => {
+                ...removedEntities.map<IFamilia>(e => {
                     return { ...e, remove: true }
                 })
             ]

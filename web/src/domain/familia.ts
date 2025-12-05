@@ -1,13 +1,12 @@
 import type IIntegrante from "./integrante";
+import type IModelEntityBase from "./modelEntityBase";
 
-export default interface IFamilia {
-    id: number
+export default interface IFamilia extends IModelEntityBase {
     nome: string
-    integrantes: IIntegrante[]
+    integrantes?: IIntegrante[]
 }
 
 export const familiaDefault: IFamilia = {
-    id: 0,
     nome: '',
     integrantes: []
 }

@@ -1,5 +1,5 @@
 import { Application, Request, Response } from "express";
-import FamiliaModel from "../domain/models/FamiliaModel";
+import IFamilia from "../domain/familia";
 import FamiliaService from "../services/FamiliaService";
 import ControllerBase from "./ControllerBase";
 
@@ -14,12 +14,12 @@ class FamiliaController extends ControllerBase<FamiliaService> {
         this.registerRoutes()
     }
 
-    get = async (_req: Request, res: Response<FamiliaModel[]>) => {
+    get = async (_req: Request, res: Response<IFamilia[]>) => {
         const result = await this.service.getData()
         return res.json(result)
     }
 
-    post = async (req: Request<unknown, FamiliaModel[], FamiliaModel[]>, res: Response<FamiliaModel[]>) => {
+    post = async (req: Request<unknown, IFamilia[], IFamilia[]>, res: Response<IFamilia[]>) => {
         const result = await this.service.syncData(req.body)
         return res.json(result)
     }
