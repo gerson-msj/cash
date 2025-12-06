@@ -33,8 +33,25 @@ function Config() {
                     onConfirm={() => alert("Confirmou!")} />
             </div>
             <div className="config-body">
-                <Familia />
-                <Integrantes />
+                <div className="painel p1">
+                    <div className="painel">
+                        <Familia />
+                    </div>
+                    <div className="painel">
+                        <Integrantes />
+                    </div>
+                </div>
+                <div className="painel p2">
+                    <div className="painel">
+                        2.1
+                    </div>
+                    <div className="painel">
+                        2.2
+                    </div>
+                    <div className="painel">
+                        2.3
+                    </div>
+                </div>
             </div>
         </div>
     )

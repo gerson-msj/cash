@@ -16,6 +16,10 @@ h1:hover {
   color: var(--header-heading-color-hover);
 }
 
+h3 {
+  padding-bottom: 5px;
+}
+
 nav {
   margin: 5px 5px;
 }

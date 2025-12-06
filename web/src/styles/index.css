@@ -8,6 +8,7 @@
 
 :root {
   --bg-color: rgb(35, 35, 35);
+  --painel-border-color: rgb(30, 30, 30);
   --color: rgb(235, 245, 255);
   --border-color: rgb(71, 145, 165);
   --button-bg-color: rgb(25, 25, 25);
@@ -24,15 +25,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  display: flex;
-  flex-direction: column;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 .lnkActive {
