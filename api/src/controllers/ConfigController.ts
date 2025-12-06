@@ -1,6 +1,6 @@
 import { Application, Request, Response } from "express";
+import { IFamilia } from "../domain/entities/familia";
 import IErro from "../domain/erro";
-import IFamilia from "../domain/familia";
 import ConfigService from "../services/ConfigService";
 import ControllerBase from "./ControllerBase";
 

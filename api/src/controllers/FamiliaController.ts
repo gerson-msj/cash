@@ -1,5 +1,5 @@
 import { Application, Request, Response } from "express";
-import IFamilia from "../domain/familia";
+import { IFamilia } from "../domain/entities/familia";
 import FamiliaService from "../services/FamiliaService";
 import ControllerBase from "./ControllerBase";
 

@@ -1,8 +1,8 @@
 import { createAction, createSlice, type ActionReducerMapBuilder, type PayloadAction } from "@reduxjs/toolkit"
 import type { AxiosResponse } from "axios"
 import { call, getContext, put, takeLatest } from "redux-saga/effects"
-import type IFamilia from "../domain/familia"
-import { familiaDefault } from "../domain/familia"
+import type IFamilia from "../domain/entities/familia"
+import { familiaDefault } from "../domain/entities/familia"
 import type { ISagaContext } from "../domain/sagaContext"
 
 const name = 'config'
@@ -18,7 +18,6 @@ const initialState: IState = {
 const reducers = {
     alterarFamilia: (state: IState, action: PayloadAction<string>) => {
         state.familia.nome = action.payload
-        console.log('alterarFamilia')
     }
 }
 

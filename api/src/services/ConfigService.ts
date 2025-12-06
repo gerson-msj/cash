@@ -1,7 +1,6 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../database/data-source";
-import FamiliaEntity from "../domain/entities/familia";
-import IFamilia from "../domain/familia";
+import FamiliaEntity, { IFamilia } from "../domain/entities/familia";
 
 export default class ConfigService {
     private get familiaRepository(): Repository<FamiliaEntity> {
@@ -20,7 +19,7 @@ export default class ConfigService {
 
     public async salvar(model: IFamilia): Promise<IFamilia> {
 
-        const familia = this.familiaRepository.create(model as FamiliaEntity)
+        const familia = this.familiaRepository.create(model)
         delete model.integrantes
 
         const result = await AppDataSource.transaction(async manager => {

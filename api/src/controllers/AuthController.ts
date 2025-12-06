@@ -12,7 +12,7 @@ export default class AuthController extends ControllerBase<AuthService> {
 
     get = async (req: Request, res: Response) => {
         try {
-            const auth = this.auth(req);
+            const auth = this.auth(req.signedCookies);
             if (!auth) {
                 return this.OkEmpty(res)
             }

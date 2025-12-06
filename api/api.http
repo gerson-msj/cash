@@ -6,7 +6,7 @@ POST {{host}}/config
 Content-Type: application/json
 
 {
-    "nome": "Moraes 02"
+    "nome": "Moraes"
 }
 
 
