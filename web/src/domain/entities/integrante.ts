@@ -1,8 +1,8 @@
-import type IBaseName from "./baseName"
 import type ICategoria from "./categoria"
 import type IConta from "./conta"
+import type IEntityBaseName from "./entityBaseName"
 
-export default interface IIntegrante extends IBaseName {
+export default interface IIntegrante extends IEntityBaseName {
     nome: string
     email: string
     senha?: string

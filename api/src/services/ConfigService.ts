@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../database/data-source";
-import FamiliaEntity from "../domain/entities/FamiliaEntity";
+import FamiliaEntity from "../domain/entities/familia";
 import IFamilia from "../domain/familia";
 
 export default class ConfigService {

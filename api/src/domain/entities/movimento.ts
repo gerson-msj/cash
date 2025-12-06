@@ -1,12 +1,12 @@
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne } from "typeorm";
 import { RepasseTipo } from "../enums";
-import BaseEntity from "./BaseEntity";
-import CategoriaEntity from "./CategoriaEntity";
-import ContaEntity from "./ContaEntity";
-import IntegranteEntity from "./IntegranteEntity";
+import CategoriaEntity from "./categoria";
+import ContaEntity from "./conta";
+import EntityBase from "./entityBase";
+import IntegranteEntity from "./integrante";
 
 @Entity('movimento')
-export default class Movimento extends BaseEntity {
+export default class Movimento extends EntityBase {
 
     @Column()
     ano!: number

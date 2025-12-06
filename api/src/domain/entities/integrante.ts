@@ -1,12 +1,20 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm"
-import IIntegrante from "../integrante"
-import BaseEntityName from "./BaseEntityName"
-import CategoriaEntity from "./CategoriaEntity"
-import ContaEntity from "./ContaEntity"
-import FamiliaEntity from "./FamiliaEntity"
+import CategoriaEntity, { ICategoria } from "./categoria"
+import ContaEntity, { IConta } from "./conta"
+import EntityBaseName, { IEntityBaseName } from "./entityBaseName"
+import FamiliaEntity from "./familia"
+
+export interface IIntegrante extends IEntityBaseName {
+    nome: string
+    email: string
+    senha?: string
+    principal: boolean
+    contas?: IConta[]
+    categorias?: ICategoria[]
+}
 
 @Entity('integrantes')
-export default class IntegranteEntity extends BaseEntityName implements IIntegrante {
+export default class IntegranteEntity extends EntityBaseName implements IIntegrante {
 
     @Column({ unique: true, nullable: false, length: 80 })
     email: string = ''
