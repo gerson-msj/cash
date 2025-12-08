@@ -42,6 +42,7 @@ const finalizar = <T extends {
     }
 }
 
+// Aplicar retry aqui!!!
 api.interceptors.request.use(
     config => {
         iniciar()

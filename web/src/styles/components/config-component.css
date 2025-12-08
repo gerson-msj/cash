@@ -1,0 +1,75 @@
+/*
+    Renderizado diretamente em main
+*/
+.config-component {
+    /* 100% da altura de main */
+    height: 100%;
+
+    /* 2 componentes, config-header e config-body. */
+    display: grid;
+    grid-template-rows: 60px 1fr;
+}
+
+.config-component h3 {
+    margin: 10px 0 0 10px;
+}
+
+.config-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px 0 15px;
+
+}
+
+.config-body {
+    height: 100%;
+
+
+
+    /*
+        coluna 1: Família e Integrantes
+        coluna 2: Diversos.
+    */
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    gap: 10px;
+
+    .p1 {
+        display: grid;
+        grid-template-rows: 30% 1fr;
+        gap: 5px;
+        min-height: 0;
+    }
+
+    .p1-2 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .p2 {
+        display: grid;
+        grid-template-columns: 1fr 33% 33%;
+        gap: 5px;
+    }
+
+    .p2-1 {
+        display: grid;
+        grid-template-rows: 1fr 35% 35%;
+        gap: 5px;
+    }
+}
+
+.config-component form {
+    justify-content: start !important;
+    margin: 0 15px;
+
+    div {
+        align-items: start !important;
+    }
+
+    div:has(button) {
+        justify-content: start !important;
+    }
+}

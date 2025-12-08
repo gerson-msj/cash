@@ -3,12 +3,12 @@
   --header-heading-color-hover: rgb(200, 245, 255);
   --a: rgb(80, 180, 255);
   --a-hover: rgb(70, 225, 255);
+  --a-selected: rgb(70, 225, 255);
   --border-color: inherit;
 }
 
 h1,
 h2 {
-  margin: 5px;
   color: var(--header-heading-color);
 }
 
@@ -16,13 +16,10 @@ h1:hover {
   color: var(--header-heading-color-hover);
 }
 
-h3 {
-  padding-bottom: 5px;
-}
+h3 {}
 
-nav {
-  margin: 5px 5px;
-}
+
+
 
 a {
   font-weight: 500;
@@ -33,7 +30,6 @@ a {
 
 a:hover {
   color: var(--a-hover);
-
 }
 
 hr {
@@ -156,6 +152,17 @@ div.msgbox.back {
 
 
 
+button.add {
+  min-width: initial;
+  width: 35px;
+  height: 35px;
+  font-size: larger;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  color: var(--a);
+  font-weight: bolder;
+}
 
 
 @media (prefers-color-scheme: light) {

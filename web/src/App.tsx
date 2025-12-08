@@ -26,16 +26,16 @@ function App() {
     dispatch(authActions.verificar(location.pathname))
   }, [location.pathname, dispatch])
 
+  /**
+   * Renderizado dentro do div#root
+   */
   return (
     <>
-      <header>
-        <Header />
-      </header>
+      <Header />
       <main>
         <AppRoutes />
-        <Espera />
       </main>
-      <footer></footer>
+      <Espera />
     </>
   )
 }

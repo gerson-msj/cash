@@ -1,0 +1,36 @@
+header.header-component {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    a {
+        padding: 5px 0 0 15px;
+
+        h1 {
+            margin: 0;
+        }
+    }
+
+    nav {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        padding-left: 30px;
+
+        a {
+            padding: 0;
+        }
+    }
+
+    div.line {
+        background-image: linear-gradient(to right,
+                var(--bg-color),
+                var(--border-color) 10%,
+                var(--bg-color) 90%);
+        background-color: var(--border-color);
+        width: 90%;
+        height: 1px;
+        align-self: center;
+        margin: 0;
+    }
+}

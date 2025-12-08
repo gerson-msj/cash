@@ -7,59 +7,96 @@
 }
 
 body {
+  /* index.html */
   margin: 0;
   padding: 0;
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
-#root {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+div#root {
+  /* index.html */
+  width: 100vw;
   min-width: 320px;
   max-width: 1280px;
+  height: 100vh;
 
-  display: flex;
-  flex-direction: column;
-}
-
-header {
-  height: var(--header-height);
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: space-between;
+  /*
+    Possui 2 elementos definidos em App.tsx
+    header e main
+    O elemento espera possui exibição fixa
+  */
+  display: grid;
+  grid-template-rows: 100px 1fr;
 }
 
 main {
+  /* App.tsx */
   width: 100%;
-  height: calc(100vh - var(--header-height));
   overflow-y: auto;
-  padding: 10px;
-  padding-left: 25px;
 }
 
-.line {
-  background-image: linear-gradient(to right,
-      var(--bg-color),
-      var(--border-color) 10%,
-      var(--bg-color) 90%);
-  background-color: var(--border-color);
-  width: 90%;
-  height: 1px;
-  align-self: center;
-}
-
-
+/* Painel */
 .painel {
   border: 1px solid var(--painel-border-color);
   border-radius: 0;
   padding: 5px;
 }
+
+.painel-lista {
+  display: grid;
+  grid-template-rows: 40px 1fr;
+
+  .painel-header {
+    padding: 0 5px 0 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      margin: 0;
+    }
+
+    button {
+      height: 30px;
+      min-width: initial;
+      width: 30px;
+    }
+  }
+
+  .painel-body {
+    overflow-y: auto;
+
+    .painel-item {
+      font-weight: 500;
+      text-align: center;
+      cursor: default;
+    }
+
+    .painel-item.lnk {
+      text-decoration: inherit;
+      color: var(--a);
+      cursor: pointer;
+      transition-property: font-size, color;
+      transition-duration: 0.1s, 0.25s;
+    }
+
+    .painel-item.lnk:hover {
+      color: var(--a-hover);
+    }
+
+    .painel-item.lnk.selected {
+      color: var(--a-selected);
+      font-size: 110%;
+      cursor: default;
+    }
+  }
+}
+
+
 
 /* .logo {
   height: 6em;
