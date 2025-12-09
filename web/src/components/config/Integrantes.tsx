@@ -20,7 +20,7 @@ export default function Integrantes() {
     }
 
     return (
-        <div className="painel-lista">
+        <div className="painel painel-lista">
 
             <div className="painel-header">
                 <h3>Integrantes</h3>

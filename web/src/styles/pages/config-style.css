@@ -1,16 +1,21 @@
 /*
     Renderizado diretamente em main
 */
-.config-component {
-    /* 100% da altura de main */
-    height: 100%;
+
+.config-main {
+
+    width: 100%;
 
     /* 2 componentes, config-header e config-body. */
     display: grid;
     grid-template-rows: 60px 1fr;
+
+    .config-body {
+        min-height: 0;
+    }
 }
 
-.config-component h3 {
+.config-main h3 {
     margin: 10px 0 0 10px;
 }
 
@@ -24,44 +29,47 @@
 }
 
 .config-body {
-    height: 100%;
 
-
-
+    padding: 5px;
     /*
         coluna 1: Família e Integrantes
         coluna 2: Diversos.
     */
     display: grid;
     grid-template-columns: 25% 1fr;
-    gap: 10px;
+    gap: 5px;
 
-    .p1 {
+    /* Paineis Familia e Integrantes */
+    .c1 {
         display: grid;
-        grid-template-rows: 30% 1fr;
-        gap: 5px;
-        min-height: 0;
-    }
-
-    .p1-2 {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .p2 {
-        display: grid;
-        grid-template-columns: 1fr 33% 33%;
+        grid-template-rows: 15% 1fr;
         gap: 5px;
     }
 
-    .p2-1 {
+    /* 
+        Coluna 2 (Diversos)
+            Painel Familia 
+                ou
+            Paineis (
+                Coluna 1: Integrante, Categorias, Contas
+            ) e (
+                Coluna 2: IntegranteEdit, CategoriaEdit ou ContaEdit
+            )
+    */
+    .c2 {
         display: grid;
-        grid-template-rows: 1fr 35% 35%;
+        grid-template-columns: 33% 1fr;
+        gap: 5px;
+    }
+
+    .c2-c1 {
+        display: grid;
+        grid-template-rows: 15% 1fr 40%;
         gap: 5px;
     }
 }
 
-.config-component form {
+.config-main form {
     justify-content: start !important;
     margin: 0 15px;
 

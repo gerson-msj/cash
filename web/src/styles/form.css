@@ -2,7 +2,10 @@
     --input-height: 30px;
     --button-height: 40px;
     --border-color: inherit;
+    --button-border-color: inherit;
+
     -webkit-focus-ring-color: var(--border-color);
+
 }
 
 form {
@@ -26,6 +29,7 @@ form {
     div:has(button) {
         flex-basis: 100%;
         justify-content: center;
+        gap: 10px;
         margin: 10px;
     }
 
@@ -56,7 +60,7 @@ input:focus-visible {
 
 button {
     border-radius: 4px;
-    border: 1px solid transparent;
+    border: 1px solid var(--button-border-color);
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;

@@ -1,6 +1,7 @@
 import { type MouseEvent } from "react"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { uiStateActions } from "../store/uiState"
+import "../styles/components/msgbox-style.css"
 
 interface MsgBoxProps {
     msgBoxKey?: string

@@ -19,7 +19,7 @@ export default function Familia() {
     }
 
     return (
-        <div className="painel-lista">
+        <div className="painel painel-lista">
             <div className="painel-header">
                 <h3>Família</h3>
             </div>

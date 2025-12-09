@@ -4,12 +4,12 @@
   --border-color: inherit;
   --button-bg-color: inherit;
   --painel-border-color: inherit;
+  --painel-bg-color: inherit;
 }
 
 body {
   /* index.html */
   margin: 0;
-  padding: 0;
 
   display: flex;
   justify-content: center;
@@ -29,19 +29,31 @@ div#root {
   */
   display: grid;
   grid-template-rows: 100px 1fr;
+
+  main {
+    min-height: 0;
+  }
 }
 
 main {
   /* App.tsx */
   width: 100%;
+  display: flex;
   overflow-y: auto;
+
+  /* Todas as páginas devem ter uma tag [page]-main */
+  :first-child {
+    min-height: 0;
+  }
 }
 
 /* Painel */
 .painel {
   border: 1px solid var(--painel-border-color);
-  border-radius: 0;
+  border-radius: 10px;
+  background-color: var(--painel-bg-color);
   padding: 5px;
+  min-height: 0;
 }
 
 .painel-lista {

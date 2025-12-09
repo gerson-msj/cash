@@ -9,7 +9,7 @@ import ButtonConfirm from "../components/ui/ButtonConfirm"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { configActions } from "../store/config"
 import { uiStateActions } from "../store/uiState"
-import "../styles/components/config-component.css"
+import "../styles/pages/config-style.css"
 
 function Config() {
 
@@ -27,7 +27,7 @@ function Config() {
     }, [dispatch])
 
     return (
-        <div className="config-component">
+        <div className="config-main">
             <div className="config-header">
                 <h2>Configurações</h2>
                 <ButtonConfirm
@@ -37,32 +37,23 @@ function Config() {
                     onConfirm={() => alert("Confirmou!")} />
             </div>
             <div className="config-body">
-                <div className="painel p1">
-                    <div className="painel p1-1">
-                        <Familia />
-                    </div>
-                    <div className="painel p1-2">
-                        <Integrantes />
-                    </div>
+                <div className="c1">
+                    <Familia />
+                    <Integrantes />
                 </div>
                 {
-                    !familiaEdit ? (
-                        <div className="painel p2">
-                            <div className="painel p2-1">
+                    familiaEdit ? (
+                        <FamiliaEdit />
+                    ) : (
+                        <div className="c2">
+                            <div className="c2-c1">
                                 <Integrante />
                                 <Categorias />
                                 <Contas />
                             </div>
-                            <div className="painel">
-                                2.2
+                            <div className="c2-c2">
+                                Diversos
                             </div>
-                            <div className="painel">
-                                2.3
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="painel p3">
-                            <FamiliaEdit />
                         </div>
                     )
                 }

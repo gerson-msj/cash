@@ -11,7 +11,7 @@ export default function FamiliaEdit() {
         || (familiaEdit?.nome ?? '') === ''
 
     return familiaEdit && (
-        <>
+        <div className="painel">
             <h3>Editar Família</h3>
             <form>
                 <div>
@@ -41,6 +41,6 @@ export default function FamiliaEdit() {
                     >Cancelar</button>
                 </div>
             </form>
-        </>
+        </div>
     )
 }

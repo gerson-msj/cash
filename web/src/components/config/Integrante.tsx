@@ -22,14 +22,14 @@ export default function Integrante() {
     }
 
     return (
-        <div className="painel">
+        <div className="painel painel-lista">
             {
                 integrante && auth && (
                     <>
                         <div className="painel-header">
                             <h3>Integrante Selecionado</h3>
                         </div>
-                        <div className="painel-lista">
+                        <div className="painel-body">
                             <div
                                 className={definirItem()}
                                 onClick={() => editarIntegrante()}

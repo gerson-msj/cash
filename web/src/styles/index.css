@@ -4,15 +4,18 @@
 
 * {
   box-sizing: border-box;
-  min-height: 0;
 }
 
 :root {
   --bg-color: rgb(35, 35, 35);
-  --painel-border-color: rgb(30, 30, 30);
+
   --color: rgb(235, 245, 255);
   --border-color: rgb(71, 145, 165);
-  --button-bg-color: rgb(25, 25, 25);
+  --button-bg-color: rgb(55, 60, 65);
+  --button-border-color: rgb(30, 30, 30);
+
+  --painel-bg-color: rgb(40, 40, 40);
+  --painel-border-color: rgb(33, 33, 33);
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -26,14 +29,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.lnkActive {
-  color: blue;
-}
-
-.lnkPending {
-  color: red;
 }
 
 @media (prefers-color-scheme: light) {
