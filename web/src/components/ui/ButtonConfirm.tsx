@@ -7,6 +7,7 @@ interface IButtonConfirm {
     text: string
     message: string
     onConfirm: () => void
+    bypassConfirm?: () => boolean
 }
 
 export default function ButtonConfirm(props: IButtonConfirm) {
@@ -15,7 +16,10 @@ export default function ButtonConfirm(props: IButtonConfirm) {
     const dispatch = useAppDispatch()
 
     const onClick = () => {
-        dispatch(uiStateActions.exibirMsgBox({ componentKey: props.componentKey }))
+        if (props.bypassConfirm !== undefined && props.bypassConfirm() === true)
+            props.onConfirm()
+        else
+            dispatch(uiStateActions.exibirMsgBox({ componentKey: props.componentKey }))
     }
 
     return (
@@ -26,7 +30,7 @@ export default function ButtonConfirm(props: IButtonConfirm) {
                 disabled={disabled?.[props.componentKey ?? 'default']}
             >{props.text}</button >
             <MsgBox
-                msgBoxKey={props.componentKey}
+                componentKey={props.componentKey}
                 message={props.message}
                 ok="Sim"
                 cancel="Não"

@@ -4,6 +4,7 @@ import { call, getContext, put, takeLatest } from "redux-saga/effects"
 import type IFamilia from "../domain/entities/familia"
 import { familiaDefault } from "../domain/entities/familia"
 import type IIntegrante from "../domain/entities/integrante"
+import { integranteDefault } from "../domain/entities/integrante"
 import type { ISagaContext } from "../domain/sagaContext"
 
 const name = 'config'
@@ -13,9 +14,8 @@ interface IState {
     familiaEdit?: IFamilia
     integrantes: Record<number, IIntegrante>
     integrante?: IIntegrante,
-    integranteEdit?: IIntegrante,
     integranteAdd?: IIntegrante,
-    idxIntegrante?: number
+    integranteEdit?: IIntegrante
 }
 
 const initialState: IState = {
@@ -23,34 +23,81 @@ const initialState: IState = {
     integrantes: {}
 }
 
+/**
+ * Limpa os estados de edição.
+ * @param state IState.
+ * @param selecionarIntegranteDefault Seleciona o integrante se houver somente um.
+ */
+const reset = (state: IState, selecionarIntegranteDefault: boolean = false) => {
+    state.familiaEdit = undefined
+    state.integrante = undefined
+    state.integranteAdd = undefined
+    state.integranteEdit = undefined
+
+    if (state.familia.integrantes?.length === 1 && selecionarIntegranteDefault) {
+        state.integrante = state.familia.integrantes[0]
+    }
+}
+
 const reducers = {
     selecionarFamilia: (state: IState) => {
+        reset(state)
         state.familiaEdit = state.familia
     },
     alterarFamilia: (state: IState, action: PayloadAction<string>) => {
-        if (state.familiaEdit)
+        if (state.familiaEdit) {
             state.familiaEdit.nome = action.payload
+        }
     },
     confirmarFamilia: (state: IState) => {
         if (state.familiaEdit) {
-            state.familia.nome = state.familiaEdit.nome
-            state.familiaEdit = undefined
+            state.familia.nome = state.familiaEdit.nome.trim()
+            reset(state, true)
         }
     },
     cancelarFamilia: (state: IState) => {
-        state.familiaEdit = undefined
+        reset(state, true)
     },
 
     selecionarIntegrante: (state: IState, action: PayloadAction<IIntegrante>) => {
+        reset(state)
         state.integrante = action.payload
     },
     editarIntegrante: (state: IState) => {
+        reset(state)
         state.integranteEdit = state.integrante
     },
-    alterarNomeIntegrante: (state: IState, action: PayloadAction<string>) => {
-        if (state.idxIntegrante !== undefined && state.familia.integrantes)
-            state.familia.integrantes[state.idxIntegrante].nome = action.payload
-    }
+
+    novoIntegrante: (state: IState) => {
+        reset(state)
+        state.integranteAdd = integranteDefault
+    },
+    alterarNovoIntegrante: <k extends keyof IIntegrante>(
+        state: IState,
+        action: PayloadAction<{ name: k, value: IIntegrante[k] }>
+    ) => {
+        if (state.integranteAdd) {
+            state.integranteAdd[action.payload.name] = action.payload.value
+        }
+    },
+    confirmarNovoIntegrante: (state: IState) => {
+        if (state.integranteAdd) {
+            const novoIntegrante: IIntegrante = {
+                ...state.integranteAdd,
+                nome: state.integranteAdd.nome.trim(),
+                email: state.integranteAdd.email.trim()
+            }
+            if (!state.familia.integrantes) {
+                state.familia.integrantes = []
+            }
+            state.familia.integrantes.push(novoIntegrante)
+            reset(state)
+            state.integrante = novoIntegrante
+        }
+    },
+    cancelarNovoIntegrante: (state: IState) => {
+        reset(state, true)
+    },
 }
 
 const extraActions = {
@@ -60,8 +107,7 @@ const extraActions = {
 const extraReducers = (builder: ActionReducerMapBuilder<IState>) => {
     builder.addCase(extraActions.requestSuccess, (state, action) => {
         state.familia = action.payload
-        if (state.familia.integrantes?.length === 1)
-            state.integrante = state.familia.integrantes[0]
+        reset(state, true)
     })
 }
 
@@ -81,7 +127,11 @@ export const configActions = {
     selecionarIntegrante: slice.actions.selecionarIntegrante,
     editarIntegrante: slice.actions.editarIntegrante,
 
-    alterarNomeIntegrante: slice.actions.alterarNomeIntegrante,
+    novoIntegrante: slice.actions.novoIntegrante,
+    alterarNovoIntegrante: slice.actions.alterarNovoIntegrante,
+    confirmarNovoIntegrante: slice.actions.confirmarNovoIntegrante,
+    cancelarNovoIntegrante: slice.actions.cancelarNovoIntegrante,
+
 }
 
 function* request() {

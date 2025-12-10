@@ -4,7 +4,7 @@ import { uiStateActions } from "../store/uiState"
 import "../styles/components/msgbox-style.css"
 
 interface MsgBoxProps {
-    msgBoxKey?: string
+    componentKey?: string
     title?: string
     message: string
     ok?: 'Ok' | 'Sim'
@@ -34,7 +34,7 @@ function MsgBox(props: MsgBoxProps) {
 
     return (
         <>
-            {msgBox?.[props.msgBoxKey ?? 'default'] && (
+            {msgBox?.[props.componentKey ?? 'default'] && (
                 <div className="msgbox back">
                     <div className="box" onClick={onClickBox}>
                         {props.title && <>

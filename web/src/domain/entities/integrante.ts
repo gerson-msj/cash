@@ -10,3 +10,9 @@ export default interface IIntegrante extends IEntityBaseName {
     contas?: IConta[]
     categorias?: ICategoria[]
 }
+
+export const integranteDefault: IIntegrante = {
+    nome: '',
+    email: '',
+    principal: false
+}

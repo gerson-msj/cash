@@ -68,16 +68,3 @@
         gap: 5px;
     }
 }
-
-.config-main form {
-    justify-content: start !important;
-    margin: 0 15px;
-
-    div {
-        align-items: start !important;
-    }
-
-    div:has(button) {
-        justify-content: start !important;
-    }
-}

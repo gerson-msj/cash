@@ -1,5 +1,5 @@
 :root {
-    --input-height: 30px;
+    --input-height: 35px;
     --button-height: 40px;
     --border-color: inherit;
     --button-border-color: inherit;
@@ -14,48 +14,56 @@ form {
     flex-wrap: wrap;
     justify-content: center;
 
-    div {
+    div.field {
         display: flex;
-    }
-
-    div:has(label) {
         flex-direction: column;
         align-items: center;
         margin: 10px;
         min-width: 200px;
 
+        label {
+            margin-left: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 0 5px 0 5px;
+            height: var(--input-height);
+            border-radius: 4px;
+            border: 1px solid transparent;
+            transition: border-color 0.25s;
+        }
+
+        input:hover {
+            border-color: var(--border-color);
+        }
+
+        input:focus,
+        input:focus-visible {
+            outline: 4px auto -webkit-focus-ring-color;
+        }
+
     }
 
-    div:has(button) {
+    div.button {
         flex-basis: 100%;
+        display: flex;
         justify-content: center;
         gap: 10px;
         margin: 10px;
     }
+}
 
-    label {
-        margin-left: 5px;
+form.form-left {
+    justify-content: start;
+
+    div.field {
+        align-items: start;
     }
 
-    input {
-        height: var(--input-height);
-        width: 100%;
+    div.button {
+        justify-content: start;
     }
-}
-
-input {
-    border-radius: 4px;
-    border: 1px solid transparent;
-    transition: border-color 0.25s;
-}
-
-input:hover {
-    border-color: var(--border-color);
-}
-
-input:focus,
-input:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
 }
 
 button {

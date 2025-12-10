@@ -42,7 +42,7 @@ const reducers = {
     buttonConfirmDisabled: (state: state, action: PayloadAction<{ componentKey?: string, disabled: boolean }>) => {
         const { componentKey, disabled } = action.payload
         const key = componentKey ?? 'default'
-        // if (!disabled)
+        // if (!disabled) ????
         //     delete state.buttonConfirmDisabled[key]
         // else
         state.buttonConfirmDisabled[key] = disabled

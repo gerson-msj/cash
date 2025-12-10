@@ -6,18 +6,22 @@ div.msgbox.back {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.2);
     cursor: default;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .box {
+    div.box {
+        background-color: var(--bg-color);
         border: 1px solid var(--border-color);
         border-radius: 5px;
         cursor: default;
+        padding: 10px;
+        min-width: fit-content;
+
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 10px;
 
         div {
             display: flex;

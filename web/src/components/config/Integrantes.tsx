@@ -5,7 +5,7 @@ import { configActions } from "../../store/config"
 export default function Integrantes() {
 
     const dispatch = useAppDispatch()
-    const { familia, integrante: integrante } = useAppSelector(state => state.config)
+    const { familia, integrante } = useAppSelector(state => state.config)
     const { principal } = useAppSelector(state => state.auth)
 
 
@@ -14,9 +14,8 @@ export default function Integrantes() {
     }
 
     const destacarIntegrante = (i: IIntegrante) => {
-        const lnk = !integrante || i.id !== integrante.id ? ' lnk' : ''
         const selected = integrante && i.id === integrante.id ? ' selected' : ''
-        return `painel-item${lnk}${selected}`
+        return `painel-item lnk${selected}`
     }
 
     return (
@@ -25,7 +24,11 @@ export default function Integrantes() {
             <div className="painel-header">
                 <h3>Integrantes</h3>
                 {
-                    principal && <button type="button" className="add">+</button>
+                    principal && <button
+                        type="button"
+                        className="add"
+                        onClick={() => dispatch(configActions.novoIntegrante())}
+                    >+</button>
                 }
             </div>
 

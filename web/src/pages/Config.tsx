@@ -4,6 +4,7 @@ import Contas from "../components/config/Contas"
 import Familia from "../components/config/Familia"
 import FamiliaEdit from "../components/config/FamiliaEdit"
 import Integrante from "../components/config/Integrante"
+import IntegranteAdd from "../components/config/IntegranteAdd"
 import Integrantes from "../components/config/Integrantes"
 import ButtonConfirm from "../components/ui/ButtonConfirm"
 import { useAppDispatch, useAppSelector } from "../hooks"
@@ -15,12 +16,17 @@ function Config() {
 
     const saveKey = 'saveConfig'
     const dispatch = useAppDispatch()
-    const { familia, familiaEdit } = useAppSelector(state => state.config)
+    const {
+        familia,
+        familiaEdit,
+        integrante,
+        integranteAdd
+    } = useAppSelector(state => state.config)
 
     useEffect(() => {
-        const disabled = familia.nome.trim() === '' || familiaEdit !== undefined
+        const disabled = familia.nome.trim() === '' || familiaEdit !== undefined || integranteAdd !== undefined
         dispatch(uiStateActions.buttonConfirmDisabled({ componentKey: saveKey, disabled }))
-    }, [familia, familiaEdit, dispatch])
+    }, [familia, familiaEdit, integranteAdd, dispatch])
 
     useEffect(() => {
         dispatch(configActions.request())
@@ -42,9 +48,10 @@ function Config() {
                     <Integrantes />
                 </div>
                 {
-                    familiaEdit ? (
-                        <FamiliaEdit />
-                    ) : (
+                    familiaEdit && <FamiliaEdit />
+                }
+                {
+                    integrante && (
                         <div className="c2">
                             <div className="c2-c1">
                                 <Integrante />
@@ -57,6 +64,10 @@ function Config() {
                         </div>
                     )
                 }
+                {
+                    integranteAdd && <IntegranteAdd />
+                }
+
             </div>
         </div>
     )
