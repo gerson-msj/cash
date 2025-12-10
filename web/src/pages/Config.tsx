@@ -8,6 +8,7 @@ import IntegranteAdd from "../components/config/IntegranteAdd"
 import Integrantes from "../components/config/Integrantes"
 import ButtonConfirm from "../components/ui/ButtonConfirm"
 import { useAppDispatch, useAppSelector } from "../hooks"
+
 import { configActions } from "../store/config"
 import { uiStateActions } from "../store/uiState"
 import "../styles/pages/config-style.css"
