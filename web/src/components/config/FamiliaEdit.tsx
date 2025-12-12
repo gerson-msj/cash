@@ -19,18 +19,18 @@ export default function FamiliaEdit() {
                     <input
                         type="text"
                         value={familiaEdit.nome}
-                        onChange={(e) => dispatch(configActions.alterarFamilia(e.currentTarget.value))}
+                        onChange={(e) => dispatch(configActions.familia.alterar(e.currentTarget.value))}
                     />
                 </div>
                 <div className="button">
                     <button
                         type="button"
                         disabled={okDisabled}
-                        onClick={() => dispatch(configActions.confirmarFamilia())}
+                        onClick={() => dispatch(configActions.familia.confirmar())}
                     >Ok</button>
                     <button
                         type="button"
-                        onClick={() => dispatch(configActions.cancelarFamilia())}
+                        onClick={() => dispatch(configActions.familia.cancelar())}
                     >Cancelar</button>
                 </div>
             </form>

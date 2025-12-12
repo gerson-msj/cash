@@ -4,12 +4,13 @@ import Contas from "../components/config/Contas"
 import Familia from "../components/config/Familia"
 import FamiliaEdit from "../components/config/FamiliaEdit"
 import Integrante from "../components/config/Integrante"
-import IntegranteAdd from "../components/config/IntegranteAdd"
 import Integrantes from "../components/config/Integrantes"
 import ButtonConfirm from "../components/ui/ButtonConfirm"
 import { useAppDispatch, useAppSelector } from "../hooks"
 
-import { configActions } from "../store/config"
+import CategoriaEdit from "../components/config/CategoriaEdit"
+import IntegranteEdit from "../components/config/IntegranteEdit"
+import { configActions, configContexts } from "../store/config"
 import { uiStateActions } from "../store/uiState"
 import "../styles/pages/config-style.css"
 
@@ -21,13 +22,21 @@ function Config() {
         familia,
         familiaEdit,
         integrante,
-        integranteAdd
+        categoria,
+
     } = useAppSelector(state => state.config)
 
+    const exibirIntegranteSelecionado =
+        integrante?.ctx === configContexts.Selecionar
+
+    const exibirIntegranteEdicao =
+        integrante?.ctx === configContexts.Criar
+        || integrante?.ctx === configContexts.Editar
+
     useEffect(() => {
-        const disabled = familia.nome.trim() === '' || familiaEdit !== undefined || integranteAdd !== undefined
+        const disabled = familia.nome.trim() === '' || familiaEdit !== undefined || integrante !== undefined
         dispatch(uiStateActions.buttonConfirmDisabled({ componentKey: saveKey, disabled }))
-    }, [familia, familiaEdit, integranteAdd, dispatch])
+    }, [familia, familiaEdit, integrante, dispatch])
 
     useEffect(() => {
         dispatch(configActions.request())
@@ -48,11 +57,9 @@ function Config() {
                     <Familia />
                     <Integrantes />
                 </div>
+                {familiaEdit && <FamiliaEdit />}
                 {
-                    familiaEdit && <FamiliaEdit />
-                }
-                {
-                    integrante && (
+                    exibirIntegranteSelecionado && (
                         <div className="c2">
                             <div className="c2-c1">
                                 <Integrante />
@@ -60,15 +67,12 @@ function Config() {
                                 <Contas />
                             </div>
                             <div className="c2-c2">
-                                Diversos
+                                {categoria && <CategoriaEdit />}
                             </div>
                         </div>
                     )
                 }
-                {
-                    integranteAdd && <IntegranteAdd />
-                }
-
+                {exibirIntegranteEdicao && <IntegranteEdit />}
             </div>
         </div>
     )

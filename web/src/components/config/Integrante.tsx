@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { configActions } from "../../store/config"
+import { configActions, configContexts } from "../../store/config"
 
 export default function Integrante() {
 
@@ -10,6 +10,10 @@ export default function Integrante() {
     const podeEditar =
         auth?.principal || integrante?.id === auth?.idIntegrante
 
+    const podeExibir =
+        integrante?.ctx === configContexts.Selecionar
+        && auth
+
     const definirItem = () => {
         const lnk = podeEditar ? ' lnk' : ''
         const selected = ''
@@ -18,13 +22,13 @@ export default function Integrante() {
 
     const editarIntegrante = () => {
         if (podeEditar)
-            dispatch(configActions.editarIntegrante())
+            dispatch(configActions.integrante.editar())
     }
 
     return (
         <div className="painel painel-lista">
             {
-                integrante && auth && (
+                podeExibir && (
                     <>
                         <div className="painel-header">
                             <h3>Integrante Selecionado</h3>

@@ -15,7 +15,7 @@ export default function Familia() {
 
     const selecionarItem = () => {
         if (!principal) return
-        dispatch(configActions.selecionarFamilia())
+        dispatch(configActions.familia.selecionar())
     }
 
     return (

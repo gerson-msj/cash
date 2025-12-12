@@ -9,7 +9,7 @@ export default function IntegranteAdd() {
     const { integranteAdd, familia } = useAppSelector(state => state.config)
 
     const change = (name: keyof IIntegrante, event: ChangeEvent<HTMLInputElement>) => {
-        dispatch(configActions.alterarNovoIntegrante({
+        dispatch(configActions.alterar({
             name,
             value: event.currentTarget.value
         }))
@@ -22,8 +22,8 @@ export default function IntegranteAdd() {
     const emailEmUso = familia.integrantes?.some(i => i.email.trim().toLowerCase() === email.toLowerCase()) ?? false
     const okDisabled = nome === '' || email === '' || senha === '' || nomeEmUso || emailEmUso
 
-    const confirmar = () => dispatch(configActions.confirmarNovoIntegrante())
-    const cancelar = () => dispatch(configActions.cancelarNovoIntegrante())
+    const confirmar = () => dispatch(configActions.confirmar())
+    const cancelar = () => dispatch(configActions.cancelar())
 
     return integranteAdd && (
         <div className="painel">

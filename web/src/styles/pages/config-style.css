@@ -67,4 +67,8 @@
         grid-template-rows: 15% 1fr 40%;
         gap: 5px;
     }
+
+    .c2-c2 {
+        display: grid;
+    }
 }

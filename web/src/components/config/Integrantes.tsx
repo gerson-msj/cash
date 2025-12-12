@@ -1,6 +1,6 @@
 import type IIntegrante from "../../domain/entities/integrante"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { configActions } from "../../store/config"
+import { configActions, configContexts } from "../../store/config"
 
 export default function Integrantes() {
 
@@ -9,12 +9,14 @@ export default function Integrantes() {
     const { principal } = useAppSelector(state => state.auth)
 
 
-    const selecionarIntegrante = (i: IIntegrante) => {
-        dispatch(configActions.selecionarIntegrante(i))
+    const selecionarIntegrante = (integrante: IIntegrante, idx: number) => {
+        dispatch(configActions.integrante.selecionar({ integrante, idx }))
     }
 
     const destacarIntegrante = (i: IIntegrante) => {
-        const selected = integrante && i.id === integrante.id ? ' selected' : ''
+        const selected = integrante && integrante.ctx === configContexts.Selecionar && i.id === integrante.id
+            ? ' selected'
+            : ''
         return `painel-item lnk${selected}`
     }
 
@@ -27,7 +29,7 @@ export default function Integrantes() {
                     principal && <button
                         type="button"
                         className="add"
-                        onClick={() => dispatch(configActions.novoIntegrante())}
+                        onClick={() => dispatch(configActions.integrante.novo())}
                     >+</button>
                 }
             </div>
@@ -39,7 +41,7 @@ export default function Integrantes() {
                             <div
                                 key={idx}
                                 className={destacarIntegrante(i)}
-                                onClick={() => selecionarIntegrante(i)}>
+                                onClick={() => selecionarIntegrante(i, idx)}>
                                 {i.nome}
                             </div>
                         )

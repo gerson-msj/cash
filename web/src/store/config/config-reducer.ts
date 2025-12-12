@@ -1,7 +1,10 @@
 import type { ActionReducerMapBuilder, PayloadAction } from "@reduxjs/toolkit"
+import type ICategoria from "../../domain/entities/categoria"
+import { CategoriaDefault } from "../../domain/entities/categoria"
 import type IIntegrante from "../../domain/entities/integrante"
 import { integranteDefault } from "../../domain/entities/integrante"
-import { extraActions, type IState } from "./config-slice"
+import { configContexts } from "../config"
+import { contexts, extraActions, type IState } from "./config-slice"
 
 /**
  * Limpa os estados de edição.
@@ -11,11 +14,13 @@ import { extraActions, type IState } from "./config-slice"
 const reset = (state: IState, selecionarIntegranteDefault: boolean = false) => {
     state.familiaEdit = undefined
     state.integrante = undefined
-    state.integranteAdd = undefined
-    state.integranteEdit = undefined
 
     if (state.familia.integrantes?.length === 1 && selecionarIntegranteDefault) {
-        state.integrante = state.familia.integrantes[0]
+        state.integrante = {
+            ...state.familia.integrantes[0],
+            idx: 0,
+            ctx: contexts.Selecionar
+        }
     }
 }
 
@@ -41,44 +46,79 @@ const familia = {
 }
 
 const integrante = {
-    selecionar: (state: IState, action: PayloadAction<IIntegrante>) => {
+    selecionar: (state: IState, action: PayloadAction<{ integrante: IIntegrante, idx: number }>) => {
         reset(state)
-        state.integrante = action.payload
+        state.integrante = {
+            ...action.payload.integrante,
+            idx: action.payload.idx,
+            ctx: contexts.Selecionar
+        }
     },
     editar: (state: IState) => {
-        reset(state)
-        state.integranteEdit = state.integrante
+        if (state.integrante) {
+            state.integrante.ctx = contexts.Editar
+        }
     },
-
     novo: (state: IState) => {
         reset(state)
-        state.integranteAdd = integranteDefault
+        state.integrante = {
+            ...integranteDefault,
+            ctx: contexts.Criar
+        }
     },
-    alterarNovo: <k extends keyof IIntegrante>(
+    alterar: <k extends keyof IIntegrante>(
         state: IState,
         action: PayloadAction<{ name: k, value: IIntegrante[k] }>
     ) => {
-        if (state.integranteAdd) {
-            state.integranteAdd[action.payload.name] = action.payload.value
+        if (state.integrante) {
+            state.integrante[action.payload.name] = action.payload.value
         }
     },
-    confirmarNovo: (state: IState) => {
-        if (state.integranteAdd) {
-            const novoIntegrante: IIntegrante = {
-                ...state.integranteAdd,
-                nome: state.integranteAdd.nome.trim(),
-                email: state.integranteAdd.email.trim()
+    confirmar: (state: IState) => {
+        if (!state.integrante)
+            return;
+
+        if (!state.familia.integrantes) {
+            state.familia.integrantes = []
+        }
+
+        const integrante: IIntegrante = {
+            ...state.integrante,
+            nome: state.integrante.nome.trim(),
+            email: state.integrante.email.trim()
+        }
+
+        if (state.integrante.ctx === contexts.Criar) {
+            const idx = state.familia.integrantes.push(integrante)
+            state.integrante = {
+                ...integrante,
+                idx: idx - 1,
+                ctx: contexts.Selecionar
             }
-            if (!state.familia.integrantes) {
-                state.familia.integrantes = []
-            }
-            state.familia.integrantes.push(novoIntegrante)
-            reset(state)
-            state.integrante = novoIntegrante
+        } else if (state.integrante.ctx === contexts.Editar && state.integrante.idx !== undefined) {
+            state.familia.integrantes[state.integrante.idx] = integrante
+            state.integrante.ctx = contexts.Selecionar
         }
     },
-    cancelarNovo: (state: IState) => {
+    cancelar: (state: IState) => {
         reset(state, true)
+    },
+}
+
+const categoria = {
+    criar: (state: IState) => {
+        state.categoria = {
+            ...CategoriaDefault,
+            ctx: configContexts.Criar
+        }
+    },
+    alterar: <k extends keyof ICategoria>(
+        state: IState,
+        action: PayloadAction<{ name: k, value: ICategoria[k] }>
+    ) => {
+        if (state.categoria) {
+            state.categoria[action.payload.name] = action.payload.value
+        }
     },
 }
 
@@ -91,9 +131,13 @@ export const reducers = {
     selecionarIntegrante: integrante.selecionar,
     editarIntegrante: integrante.editar,
     novoIntegrante: integrante.novo,
-    alterarNovoIntegrante: integrante.alterarNovo,
-    confirmarNovoIntegrante: integrante.confirmarNovo,
-    cancelarNovoIntegrante: integrante.cancelarNovo
+    alterarIntegrante: integrante.alterar,
+    confirmarIntegrante: integrante.confirmar,
+    cancelarIntegrante: integrante.cancelar,
+
+    categoriaCriar: categoria.criar,
+    categoriaAlterar: categoria.alterar,
+
 }
 
 export const extraReducers = (builder: ActionReducerMapBuilder<IState>) => {
