@@ -12,7 +12,7 @@ export enum CategoriaTipo {
     /** Aporte: Aporte financeiro (ganhos, recebimento de juros, transferências de entrada, etc...) */
     Aporte = 'APORTE',
 
-    /** Retirada: Retirada fianceira (perdas, pagamentos de juros, transferências de saida, etc...) */
+    /** Retirada: Retirada finaceira (perdas, pagamentos de juros, transferências de saida, etc...) */
     Retirada = 'RETIRADA',
 
     /** Realocação: Realocação financeira entre contas pessoais (Transferência Pessoal, Balanceamento, etc...) */

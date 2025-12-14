@@ -1,7 +1,9 @@
 import type { AxiosResponse } from "axios"
-import { call, getContext, put } from "redux-saga/effects"
+import { call, getContext, put, select } from "redux-saga/effects"
+import type { RootState } from ".."
 import type IFamilia from "../../domain/entities/familia"
 import type { ISagaContext } from "../../domain/sagaContext"
+import { uiStateActions } from "../uiState"
 import { extraActions } from "./config-slice"
 
 export function* request() {
@@ -24,3 +26,14 @@ export function* request() {
     }
 }
 
+export function* save() {
+    const { api }: ISagaContext = yield getContext('ctx')
+    try {
+        const familia: IFamilia = yield select((state: RootState) => state.config.familia)
+        const response: AxiosResponse<IFamilia> = yield call(api.post, '/config', familia)
+        yield put(extraActions.requestSuccess(response.data))
+        yield put(uiStateActions.exibirMsgBox({ componentKey: 'save' }))
+    } catch (error) {
+        console.error(error)
+    }
+}

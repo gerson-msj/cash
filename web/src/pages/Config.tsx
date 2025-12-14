@@ -8,8 +8,11 @@ import Integrantes from "../components/config/Integrantes"
 import ButtonConfirm from "../components/ui/ButtonConfirm"
 import { useAppDispatch, useAppSelector } from "../hooks"
 
+import Aviso from "../components/Aviso"
 import CategoriaEdit from "../components/config/CategoriaEdit"
+import ContaEdit from "../components/config/ContaEdit"
 import IntegranteEdit from "../components/config/IntegranteEdit"
+import MsgBox from "../components/MsgBox"
 import { configActions, configContexts } from "../store/config"
 import { uiStateActions } from "../store/uiState"
 import "../styles/pages/config-style.css"
@@ -23,6 +26,7 @@ function Config() {
         familiaEdit,
         integrante,
         categoria,
+        conta
 
     } = useAppSelector(state => state.config)
 
@@ -34,9 +38,14 @@ function Config() {
         || integrante?.ctx === configContexts.Editar
 
     useEffect(() => {
-        const disabled = familia.nome.trim() === '' || familiaEdit !== undefined || integrante !== undefined
+        const disabled = familia.nome.trim() === ''
+            || familiaEdit !== undefined
+            || (integrante && integrante?.ctx !== configContexts.Selecionar)
+            || categoria !== undefined
+            || conta !== undefined
+
         dispatch(uiStateActions.buttonConfirmDisabled({ componentKey: saveKey, disabled }))
-    }, [familia, familiaEdit, integrante, dispatch])
+    }, [familia, familiaEdit, integrante, categoria, conta, dispatch])
 
     useEffect(() => {
         dispatch(configActions.request())
@@ -46,11 +55,17 @@ function Config() {
         <div className="config-main">
             <div className="config-header">
                 <h2>Configurações</h2>
+                <Aviso />
                 <ButtonConfirm
                     componentKey={saveKey}
                     text="Salvar"
                     message="Confirma a gravação das alterações?"
-                    onConfirm={() => alert("Confirmou!")} />
+                    onConfirm={() => alert("Confirmou!")}
+                />
+                <MsgBox
+                    componentKey="save"
+                    message="Configurações persistidas com sucesso!"
+                />
             </div>
             <div className="config-body">
                 <div className="c1">
@@ -68,11 +83,13 @@ function Config() {
                             </div>
                             <div className="c2-c2">
                                 {categoria && <CategoriaEdit />}
+                                {conta && <ContaEdit />}
                             </div>
                         </div>
                     )
                 }
                 {exibirIntegranteEdicao && <IntegranteEdit />}
+
             </div>
         </div>
     )

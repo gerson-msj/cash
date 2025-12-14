@@ -64,7 +64,7 @@
 
     .c2-c1 {
         display: grid;
-        grid-template-rows: 15% 1fr 40%;
+        grid-template-rows: 15% 40% 1fr;
         gap: 5px;
     }
 

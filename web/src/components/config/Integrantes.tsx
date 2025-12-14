@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import type IIntegrante from "../../domain/entities/integrante"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { configActions, configContexts } from "../../store/config"
@@ -5,8 +6,8 @@ import { configActions, configContexts } from "../../store/config"
 export default function Integrantes() {
 
     const dispatch = useAppDispatch()
-    const { familia, integrante } = useAppSelector(state => state.config)
-    const { principal } = useAppSelector(state => state.auth)
+    const { familia, integrante, familiaEdit } = useAppSelector(state => state.config)
+    const { auth, principal } = useAppSelector(state => state.auth)
 
 
     const selecionarIntegrante = (integrante: IIntegrante, idx: number) => {
@@ -19,6 +20,16 @@ export default function Integrantes() {
             : ''
         return `painel-item lnk${selected}`
     }
+
+    useEffect(() => {
+        if (!integrante && !familiaEdit) {
+            const idx = familia.integrantes?.findIndex(i => i.id === auth?.idIntegrante)
+            if (idx !== undefined && idx > -1) {
+                const i = familia.integrantes![idx]
+                dispatch(configActions.integrante.selecionar({ integrante: i, idx }))
+            }
+        }
+    }, [familia, integrante, familiaEdit, auth, dispatch])
 
     return (
         <div className="painel painel-lista">
@@ -37,7 +48,7 @@ export default function Integrantes() {
             <div className="painel-body">
                 {
                     familia.integrantes?.map((i, idx) => {
-                        return (
+                        return !i.remove && (
                             <div
                                 key={idx}
                                 className={destacarIntegrante(i)}

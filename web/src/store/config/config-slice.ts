@@ -41,6 +41,7 @@ export const slice = createSlice({
 
 export const actions = {
     request: createAction(`${name}/request`),
+    save: createAction(`${name}/save`),
 
     familia: {
         selecionar: slice.actions.selecionarFamilia,
@@ -56,12 +57,25 @@ export const actions = {
         alterar: slice.actions.alterarIntegrante,
         confirmar: slice.actions.confirmarIntegrante,
         cancelar: slice.actions.cancelarIntegrante,
+        excluir: slice.actions.excluirIntegrante
     },
 
     categoria: {
         criar: slice.actions.categoriaCriar,
+        editar: slice.actions.categoriaEditar,
         alterar: slice.actions.categoriaAlterar,
+        confirmar: slice.actions.categoriaConfirmar,
+        cancelar: slice.actions.categoriaCancelar,
+        excluir: slice.actions.categoriaExcluir
+    },
 
+    conta: {
+        criar: slice.actions.contaCriar,
+        editar: slice.actions.contaEditar,
+        alterar: slice.actions.contaAlterar,
+        confirmar: slice.actions.contaConfirmar,
+        cancelar: slice.actions.contaCancelar,
+        excluir: slice.actions.contaExcluir
     },
 
 }

@@ -3,6 +3,7 @@
     --button-height: 40px;
     --border-color: inherit;
     --button-border-color: inherit;
+    --frame-border-color: inherit;
 
     -webkit-focus-ring-color: var(--border-color);
 
@@ -47,10 +48,28 @@ form {
 
     div.button {
         flex-basis: 100%;
+        margin: 10px;
+
         display: flex;
         justify-content: center;
         gap: 10px;
+    }
+
+    div.radio {
+        flex-basis: 100%;
         margin: 10px;
+
+        fieldset {
+            border: 1px solid var(--frame-border-color);
+            border-radius: 5px;
+            width: fit-content;
+            min-width: calc(200px - 2px);
+            padding-right: 20px;
+        }
+
+        label {
+            margin-left: 10px;
+        }
     }
 }
 
@@ -74,7 +93,8 @@ button {
     font-family: inherit;
     background-color: var(--button-bg-color);
     cursor: pointer;
-    transition: border-color 0.25s;
+    transition-property: border-color, color;
+    transition-duration: 0.25s, 0.25s;
 
     height: var(--button-height);
     min-width: 150px;

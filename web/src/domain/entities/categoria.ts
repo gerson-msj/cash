@@ -30,4 +30,4 @@ export const categoriaTipoText: Record<CategoriaTipo, string> = {
 }
 
 export const categoriaText = (categoria: ICategoria) =>
-    `${categoria.nome} - tipo: ${categoriaTipoText[categoria.categoriaTipo]}`
+    `${categoria.nome} (${categoriaTipoText[categoria.categoriaTipo]})`
