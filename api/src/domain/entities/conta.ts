@@ -33,7 +33,8 @@ export default class ContaEntity extends EntityBaseName implements IConta {
 
     @ManyToOne(() => IntegranteEntity, (integrante) => integrante.contas, {
         nullable: false,
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+        orphanedRowAction: "delete"
     })
     @JoinColumn({
         name: 'id_integrante',

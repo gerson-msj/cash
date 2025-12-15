@@ -29,9 +29,19 @@ export default class CategoriaEntity extends EntityBaseName implements ICategori
     @Column({ name: 'categoria_tipo', enum: CategoriaTipo, type: 'varchar' })
     categoriaTipo!: CategoriaTipo
 
+    /**
+     * Neste relacionamento, no save, uma categoria não informada no integrante
+     * é removida.
+     * Para ignorar a exclusão, categoria deve ser undefined, pois um array[0]
+     * Irá remover todas as categorias.
+     * Ademais, manter nullable true e retirar orphaned, ao não informar
+     * um registro no array ele apenas terá o relacionamento quebrado
+     * e a remoção (remove) terá que ser manual.
+     */
     @ManyToOne(() => IntegranteEntity, (integrante) => integrante.contas, {
         nullable: false,
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+        orphanedRowAction: 'delete'
     })
     @JoinColumn({
         name: 'id_integrante',

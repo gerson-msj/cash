@@ -39,8 +39,9 @@ export default class ConfigController extends ControllerBase<ConfigService> {
         model.id = auth.idFamilia
 
         try {
-            const result = await this.service.salvar(model)
-            return res.json(result)
+            const familia = await this.service.salvar(model)
+            familia.integrantes?.forEach(i => delete i.senha)
+            return res.json(familia)
         } catch (error) {
             console.log(error)
             return this.serverError(res, "Erro ao salvar alterações.")

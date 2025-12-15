@@ -6,7 +6,43 @@ POST {{host}}/config
 Content-Type: application/json
 
 {
-    "nome": "Moraes"
+    "nome": "Moraes",
+    "integrantes": [
+        {
+            "id": 4,
+            "nome": "Gerson",
+            "email": "gerson.msj@gmail.com",
+            "senha": "gerson",
+            "principal": true,
+            "categorias": [
+                {
+                    "id": 1,
+                    "nome": "Salário",
+                    "categoriaTipo": "RECEITA"
+                },
+                {
+                    "id": 5,
+                    "nome": "Extra",
+                    "categoriaTipo": "RECEITA",
+                    "remove": true
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "nome": "Paula",
+            "email": "paula@gmail.com",
+            "senha": "paula",
+            "principal": false,
+            "categorias": [
+                {
+                    "id": 3,
+                    "nome": "Salário",
+                    "categoriaTipo": "RECEITA"
+                }
+            ]
+        }
+    ]
 }
 
 

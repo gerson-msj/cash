@@ -27,7 +27,8 @@ export default class IntegranteEntity extends EntityBaseName implements IIntegra
 
     @ManyToOne(() => FamiliaEntity, {
         nullable: false,
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+        orphanedRowAction: 'delete'
     })
     @JoinColumn({
         name: 'id_familia',

@@ -11,7 +11,8 @@ export interface IFamilia extends IEntityBaseName {
 export default class FamiliaEntity extends EntityBaseName implements IFamilia {
 
     @OneToMany(() => IntegranteEntity, (integrante) => integrante.familia, {
-        cascade: true
+        cascade: true,
+        orphanedRowAction: "delete"
     })
     integrantes?: IntegranteEntity[]
 }
