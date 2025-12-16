@@ -21,6 +21,10 @@ function Header() {
                     {
                         auth && (
                             <>
+                                <Link to='/movimento'>
+                                    Movimentos
+                                </Link>
+                                {' | '}
                                 <Link to="/config">
                                     Configurações
                                 </Link>

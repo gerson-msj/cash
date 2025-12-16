@@ -3,6 +3,7 @@ import Cadastro from "../pages/Cadastro";
 import Config from "../pages/Config";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import Movimento from "../pages/Movimento";
 
 export default function AppRoutes() {
     return (
@@ -11,6 +12,7 @@ export default function AppRoutes() {
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/config" element={<Config />} />
+            <Route path="/movimento" element={<Movimento />} />
         </Routes>
     );
 }
