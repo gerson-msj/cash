@@ -60,7 +60,7 @@ function Config() {
                     componentKey={saveKey}
                     text="Salvar"
                     message="Confirma a gravação das alterações?"
-                    onConfirm={() => alert("Confirmou!")}
+                    onConfirm={() => dispatch(configActions.save())}
                 />
                 <MsgBox
                     componentKey="save"

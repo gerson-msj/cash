@@ -15,8 +15,8 @@ export enum ContaTipo {
 
 export interface IConta extends IEntityBaseName {
     contaTipo: ContaTipo
+    diaCorteCredito?: number
     diaVencimentoCredito?: number
-    saldo: number
 }
 
 @Entity('contas')
@@ -25,11 +25,11 @@ export default class ContaEntity extends EntityBaseName implements IConta {
     @Column({ name: 'conta_tipo', enum: ContaTipo, type: 'varchar' })
     contaTipo!: ContaTipo
 
+    @Column({ name: 'dia_corte_credito', nullable: true })
+    diaCorteCredito?: number
+
     @Column({ name: 'dia_vencimento_credito', nullable: true })
     diaVencimentoCredito?: number
-
-    @Column()
-    saldo: number = 0
 
     @ManyToOne(() => IntegranteEntity, (integrante) => integrante.contas, {
         nullable: false,

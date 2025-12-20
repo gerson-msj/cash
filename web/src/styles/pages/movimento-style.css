@@ -1,0 +1,29 @@
+.movimento {
+    width: 100%;
+
+    display: grid;
+    grid-template-rows: 60px 1fr;
+
+    .body {
+        min-height: 0;
+    }
+}
+
+.movimento .header {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 15px 0 15px;
+}
+
+.movimento .header .datas {
+    background-color: black;
+}
+
+.movimento .body {
+    background-color: black;
+}

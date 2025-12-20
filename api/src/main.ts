@@ -57,6 +57,38 @@ const bootstrap = async () => {
     }
 
     console.log("🚀 Rodando em http://localhost:3000")
+
+    await teste()
+}
+
+const teste = async () => {
+
+    // console.clear()
+    // const repo = AppDataSource.getRepository(CategoriaEntity)
+    // const ct = await repo.findOneBy({ id: 7 })
+    // console.log(ct)
+
+    // const repoMvDetalhe = AppDataSource.getRepository(MvDetalheEntity)
+    // const mvDetalhe = await repoMvDetalhe.findOneBy({ id: 2 })
+    // console.log(mvDetalhe)
+
+    // const newMvDetalhe = repoMvDetalhe.create({
+    //     dia: 19,
+    //     descricao: 'teste3',
+    //     valor: 30,
+    //     idMv: 90,
+    //     mv: {
+    //         id: 1
+    //     },
+    //     categoria: {
+    //         id: 7
+    //     },
+    //     conta: {
+    //         id: 1
+    //     }
+    // })
+    // const y = await repoMvDetalhe.save(newMvDetalhe)
+    // console.log('new', y)
 }
 
 bootstrap()

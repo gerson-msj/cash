@@ -3,7 +3,6 @@ import EntityBaseName, { IEntityBaseName } from "./entityBaseName";
 import IntegranteEntity, { IIntegrante } from "./integrante";
 
 export interface IFamilia extends IEntityBaseName {
-    nome: string
     integrantes?: IIntegrante[]
 }
 
@@ -12,7 +11,7 @@ export default class FamiliaEntity extends EntityBaseName implements IFamilia {
 
     @OneToMany(() => IntegranteEntity, (integrante) => integrante.familia, {
         cascade: true,
-        orphanedRowAction: "delete"
+        eager: false
     })
     integrantes?: IntegranteEntity[]
 }

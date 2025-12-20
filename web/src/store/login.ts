@@ -9,17 +9,17 @@ import { authActions } from "./auth"
 
 const name = 'login'
 
-interface state {
+interface IState {
     login: ILogin
 }
 
-const initialState: state = {
+const initialState: IState = {
     login: LoginDefault
 }
 
 const reducers = {
     change: <k extends keyof ILogin>(
-        state: state,
+        state: IState,
         action: PayloadAction<{ name: k, value: ILogin[k] }>
     ) => {
         state.login[action.payload.name] = action.payload.value
